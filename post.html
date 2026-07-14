@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneLeaks Forum</title>
+<meta name="description" content="Утечка с OneLeaks Forum">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="md3-app">
+
+  <header class="top-app-bar">
+    <a class="top-app-bar__brand" href="index.html">
+      <img class="top-app-bar__logo" src="assets/logo.jpg" alt="OneLeaks Forum">
+      <span class="top-app-bar__title">OneLeaks Forum<small>Утечки OnePlus из первых рук</small></span>
+    </a>
+    <button class="icon-btn" id="theme-toggle" aria-label="Сменить тему">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 16a7 7 0 010-14v14z"/></svg>
+    </button>
+  </header>
+
+  <main class="md3-content">
+    <div class="container" id="post-root">
+      <!-- Filled in by js/app.js from data/posts.js -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__row">
+      <span>© 2026 OneLeaks Forum. Неофициальный фанатский проект, не связан с OnePlus Technology Co., Ltd.</span>
+      <span>Собрано на <a href="https://m3.material.io/" target="_blank" rel="noopener">Material Design 3</a></span>
+    </div>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="Основная навигация">
+    <a href="index.html">
+      <svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/></svg>
+      Главная
+    </a>
+    <a href="index.html#post-grid">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h10v2H4z"/></svg>
+      Ленты
+    </a>
+  </nav>
+</div>
+
+<button class="fab" id="fab-top" aria-label="Наверх">
+  <svg viewBox="0 0 24 24"><path d="M12 6l-8 8 1.41 1.41L11 9.83V20h2V9.83l5.59 5.58L20 14z"/></svg>
+</button>
+
+<script src="data/posts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.5/purify.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
