@@ -32,11 +32,35 @@
     return [...map.entries()].sort((a, b) => b[1] - a[1]);
   }
 
-  function coverImg(post, cssClass) {
-    if (post.cover) {
-      return `<img src="${escapeHtml(post.cover)}" alt="" loading="lazy" class="${cssClass || ""}">`;
+  /**
+   * Builds cover markup as a "letterbox" frame: a blurred, scaled-up copy of
+   * the image fills the box edge-to-edge as a backdrop, while the real image
+   * sits on top with object-fit:contain — so nothing gets cropped no matter
+   * the source photo's orientation (portrait phone screenshots included).
+   *
+   * wrapClass: if provided, the fragment is wrapped in a sized <div> with
+   * that class (used on the article page, which owns its own box). If
+   * omitted, the fragment is returned bare, to be dropped inside a parent
+   * that is already sized+positioned (used for grid cards).
+   */
+  function coverFragment(post) {
+    if (!post.cover) {
+      return `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`;
     }
-    return `<div class="${cssClass || ""}" style="display:grid;place-items:center;background:var(--md-sys-color-surface-container-high);width:100%;height:100%;color:var(--md-sys-color-on-surface-variant)">${FALLBACK_COVER_ICON}</div>`;
+    const src = escapeHtml(post.cover);
+    return `
+      <div class="cover-frame__blur" style="background-image:url('${src}')" aria-hidden="true"></div>
+      <img src="${src}" alt="" loading="lazy" class="cover-frame__img"
+           onerror="this.parentElement.innerHTML='<div class=&quot;cover-frame__empty&quot;>${FALLBACK_COVER_ICON.replace(/"/g, "&quot;")}</div>'">
+    `;
+  }
+
+  function coverImg(post, wrapClass) {
+    const inner = coverFragment(post);
+    if (wrapClass) {
+      return `<div class="${wrapClass} cover-frame">${inner}</div>`;
+    }
+    return inner;
   }
 
   function cardTemplate(post) {
@@ -47,7 +71,7 @@
     return `
       <a class="post-card" href="post.html?slug=${encodeURIComponent(post.slug)}" data-tags="${(post.tags || []).map(slugifyTag).join(" ")}">
         <div class="post-card__media">
-          ${coverImg(post, "")}
+          ${coverImg(post)}
           <span class="post-card__badge">${escapeHtml(post.tags && post.tags[0] ? post.tags[0] : "Утечка")}</span>
         </div>
         <div class="post-card__body">
