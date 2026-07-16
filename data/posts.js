@@ -36,6 +36,7 @@ const POSTS = [
     excerpt: "Если всё правда — OnePlus 16 может стать самым безумным флагманом года: гигантская батарея, 185 Гц и 2‑нм Snapdragon.",
     author: "@ivanchela11",
     date: "2026-07-15",
+    category: "leaks",
     cover: "assets/covers/oneplus16.jpg",
     tags: ["OnePlus 16", "Номерная линейка"],
     content: `
@@ -65,6 +66,7 @@ const POSTS = [
     excerpt: "OnePlus прекращает запуск новых продуктов в Европе и Северной Америке; поддержка существующих устройств сохраняется в рамках обещанных сроков.",
     author: "@ivanchela11",
     date: "2026-07-16",
+    category: "leaks",
     cover: "assets/covers/minusone.jpg",
     tags: ["OnePlusLeave2026"],
     content: `
