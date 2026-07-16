@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OneLeaks Forum — утечки компании OnePlus</title>
+<title>OneLeaks Forum — утечки OnePlus</title>
 <meta name="description" content="OneLeaks Forum — независимый форум утечек OnePlus: рендеры, чейнджлоги OxygenOS, цены и слухи о железе, всё в одном месте.">
 <link rel="icon" href="assets/logo.jpg">
 <link rel="stylesheet" href="css/style.css">
@@ -45,14 +45,15 @@
       <div class="toolbar">
         <label class="search-field">
           <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 10-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1114 9.5 4.5 4.5 0 019.5 14z"/></svg>
-          <input type="search" id="search-input" placeholder="Искать утечку по названию, тегу или описанию…" aria-label="Поиск по утечкам">
+          <input type="search" id="search-input" placeholder="Искать по названию, тегу или описанию…" aria-label="Поиск по постам">
         </label>
+        <div class="category-tabs" id="category-tabs" role="tablist" aria-label="Категория"></div>
         <div class="chip-row" id="chip-row" role="group" aria-label="Фильтр по тегам"></div>
       </div>
 
       <div class="section-label">
-        <span>Последние утечки</span>
-        <span id="result-count">0 утечек</span>
+        <span>Свежее</span>
+        <span id="result-count">0</span>
       </div>
 
       <div class="post-grid" id="post-grid"></div>
