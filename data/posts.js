@@ -174,6 +174,7 @@ OnePlus явно хочет атаковать самую конкурентну
     excerpt: "Свежая утечка намекает, что оба флагмана могут обойти Индии стороной, несмотря на официальные заявления OnePlus.",
     author: "@ivanchela11",
     date: "2026-07-20",
+    category: "leaks",
     cover: "assets/covers/india.png",
     tags: ["OnePlus 16", "Номерные модели"],
     content: `
