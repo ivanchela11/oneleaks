@@ -37,7 +37,11 @@
           <span class="hero__eyebrow"><span class="dot"></span> live tips channel</span>
           <h1>Всё, что просочилось из OnePlus — в одном месте</h1>
           <p class="lead">Рендеры, прошивки, чейнджлоги OxygenOS и слухи о железе от анонимных источников и сообщества. Без official statements, только то, что утекло раньше времени.</p>
+          <div class="stats-row" id="stats-row"></div>
         </div>
+      </div>
+      <div class="container">
+        <div id="featured-post"></div>
       </div>
     </section>
 
@@ -52,7 +56,7 @@
       </div>
 
       <div class="section-label">
-        <span>Свежее</span>
+        <span class="section-label__lead"><span class="section-label__mark" aria-hidden="true"></span>Свежее</span>
         <span id="result-count">0</span>
       </div>
 
@@ -69,9 +73,29 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container site-footer__row">
-      <span>© 2026 OneLeaks Forum. Неофициальный фанатский проект, не связан с OnePlus Technology Co., Ltd.</span>
-      <span>Собрано на <a href="https://m3.material.io/" target="_blank" rel="noopener">Material Design 3</a></span>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>OneLeaks Forum</h4>
+          <p>Независимый форум утечек OnePlus: рендеры, чейнджлоги OxygenOS, цены на будущие устройства и инструкции для тех, кто не хочет ждать официального релиза.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="index.html">Все посты</a></li>
+            <li><a href="#" data-footer-cat="leaks">Утечки</a></li>
+            <li><a href="#" data-footer-cat="guides">Инструкции</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Популярные теги</h4>
+          <div class="footer-tagcloud" id="footer-tagcloud"></div>
+        </div>
+      </div>
+      <div class="site-footer__row">
+        <span>© 2026 OneLeaks Forum. Неофициальный фанатский проект, не связан с OnePlus Technology Co., Ltd.</span>
+        <span>Собрано на <a href="https://m3.material.io/" target="_blank" rel="noopener">Material Design 3</a></span>
+      </div>
     </div>
   </footer>
 
@@ -97,3 +121,4 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+
