@@ -46,6 +46,12 @@
     return forms[2];
   }
 
+  function initialsOf(author) {
+    const clean = (author || "?").replace(/^@/, "");
+    const letters = clean.replace(/[^a-zA-Zа-яА-ЯёЁ0-9]/g, "");
+    return (letters.slice(0, 2) || "??").toUpperCase();
+  }
+
   function allTags(posts) {
     const map = new Map();
     posts.forEach((p) => (p.tags || []).forEach((t) => map.set(t, (map.get(t) || 0) + 1)));
@@ -102,12 +108,51 @@
           <h3 class="post-card__title">${escapeHtml(post.title)}</h3>
           <p class="post-card__excerpt">${escapeHtml(post.excerpt)}</p>
           <div class="post-card__meta">
+            <span class="avatar">${escapeHtml(initialsOf(post.author))}</span>
             <span>${escapeHtml(post.author || "аноним")}</span>
             <span class="sep">•</span>
             <span>${formatDate(post.date)}</span>
           </div>
         </div>
       </a>`;
+  }
+
+  function featuredTemplate(post) {
+    const cat = categoryOf(post);
+    const tags = (post.tags || [])
+      .slice(0, 3)
+      .map((t) => `<span class="tag-pill">${escapeHtml(t)}</span>`)
+      .join("");
+    return `
+      <a class="featured" href="post.html?slug=${encodeURIComponent(post.slug)}">
+        <div class="featured__media">${coverImg(post)}</div>
+        <div class="featured__body">
+          <span class="featured__eyebrow">Свежее • ${escapeHtml(CATEGORIES[cat].label)}</span>
+          <h2 class="featured__title">${escapeHtml(post.title)}</h2>
+          <p class="featured__excerpt">${escapeHtml(post.excerpt)}</p>
+          <div class="featured__tags">${tags}</div>
+        </div>
+      </a>`;
+  }
+
+  function renderStats(container, posts) {
+    if (!container) return;
+    const leaksCount = posts.filter((p) => categoryOf(p) === "leaks").length;
+    const guidesCount = posts.filter((p) => categoryOf(p) === "guides").length;
+    const tagsCount = allTags(posts).length;
+    container.innerHTML = `
+      <div class="stat"><span class="stat__value">${leaksCount}</span><span class="stat__label">${pluralize(leaksCount, CATEGORIES.leaks.plural)}</span></div>
+      <div class="stat"><span class="stat__value">${guidesCount}</span><span class="stat__label">${pluralize(guidesCount, CATEGORIES.guides.plural)}</span></div>
+      <div class="stat"><span class="stat__value">${tagsCount}</span><span class="stat__label">${pluralize(tagsCount, ["тег", "тега", "тегов"])}</span></div>
+    `;
+  }
+
+  function renderFooterTagCloud(container, posts) {
+    if (!container) return;
+    const top = allTags(posts).slice(0, 10);
+    container.innerHTML = top
+      .map(([tag]) => `<span class="tag-pill" title="${escapeHtml(tag)}">${escapeHtml(tag)}</span>`)
+      .join("");
   }
 
   /* ---------------- Home page ---------------- */
@@ -122,6 +167,11 @@
     const searchInput = document.getElementById("search-input");
     const countLabel = document.getElementById("result-count");
     const emptyState = document.getElementById("empty-state");
+
+    renderStats(document.getElementById("stats-row"), sorted);
+    const featuredEl = document.getElementById("featured-post");
+    if (featuredEl && sorted[0]) featuredEl.innerHTML = featuredTemplate(sorted[0]);
+    renderFooterTagCloud(document.getElementById("footer-tagcloud"), sorted);
 
     let activeCategory = null; // null = all
     let activeTag = null;
@@ -198,6 +248,16 @@
     }
 
     render();
+
+    // Footer "Разделы" links jump to the matching category tab, if present.
+    document.querySelectorAll("[data-footer-cat]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const btn = categoryTabs.querySelector(`.tab[data-category="${link.dataset.footerCat}"]`);
+        if (btn) btn.click();
+        grid.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   }
 
   /* ---------------- Markdown post-processing ----------------
@@ -280,19 +340,43 @@
         <span class="category-pill category-pill--${cat}">${escapeHtml(CATEGORIES[cat].label)}</span>
         <h1 class="article-title">${escapeHtml(post.title)}</h1>
         <div class="article-meta">
-          <span>${escapeHtml(post.author || "аноним")}</span>
+          <span class="article-meta__author">
+            <span class="avatar">${escapeHtml(initialsOf(post.author))}</span>
+            ${escapeHtml(post.author || "аноним")}
+          </span>
           <span>•</span>
           <span>${formatDate(post.date)}</span>
         </div>
         <div class="article-tags">${tagsHtml}</div>
       </div>
       <article class="article-body" id="article-content">${html}</article>
+      <div id="related-slot"></div>
       <div>
         <a class="btn btn--tonal" href="index.html">← Другие посты</a>
       </div>
     `;
 
     enhanceArticleContent(document.getElementById("article-content"));
+
+    // Related posts: same category first, ranked by number of shared tags.
+    const related = POSTS.filter((p) => p.slug !== post.slug)
+      .map((p) => {
+        const shared = (p.tags || []).filter((t) => (post.tags || []).includes(t)).length;
+        return { p, score: shared + (categoryOf(p) === cat ? 0.5 : 0) };
+      })
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score || new Date(b.p.date) - new Date(a.p.date))
+      .slice(0, 3)
+      .map((x) => x.p);
+
+    const relatedSlot = document.getElementById("related-slot");
+    if (relatedSlot && related.length) {
+      relatedSlot.innerHTML = `
+        <section class="related">
+          <h2>Похожие посты</h2>
+          <div class="related__grid">${related.map(cardTemplate).join("")}</div>
+        </section>`;
+    }
   }
 
   /* ---------------- Shared chrome (theme toggle, FAB, nav) ---------------- */
