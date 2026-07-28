@@ -32,6 +32,27 @@
   --dur-medium: 400ms;
   --dur-long: 500ms;
 
+  /* Official M3 motion scale + state-layer opacities
+     (aligned with the Material You CSS reference library) */
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  --md-sys-state-hover-opacity: 0.08;
+  --md-sys-state-focus-opacity: 0.12;
+  --md-sys-state-pressed-opacity: 0.12;
+  --md-sys-state-dragged-opacity: 0.16;
+
   /* ---------- Typography ---------- */
   --font-display: "Roboto Flex", "Roboto", sans-serif;
   --font-body: "Roboto Flex", "Roboto", sans-serif;
@@ -148,7 +169,7 @@
 /* ---------------------------------------------------------------------
    Base / resets
    --------------------------------------------------------------------- */
-*, *::before, *::after{ box-sizing: border-box; }
+*, *::before, *::after{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html{ -webkit-text-size-adjust: 100%; }
 body{
   margin: 0;
@@ -657,3 +678,55 @@ button{ font: inherit; color: inherit; }
   .hero h1{ font: 700 1.75rem/2.25rem var(--font-display); }
   .hero__mark{ width:72px; height:72px; }
 }
+
+/* =========================================================================
+   Elevation utilities (from the Material You reference library) — used for
+   the app bar once the page is scrolled, and available generally.
+   ========================================================================= */
+.md-elevation-0{ box-shadow: none; }
+.md-elevation-1{ box-shadow: 0px 1px 2px rgba(0,0,0,.3), 0px 1px 3px 1px rgba(0,0,0,.15); }
+.md-elevation-2{ box-shadow: 0px 1px 2px rgba(0,0,0,.3), 0px 2px 6px 2px rgba(0,0,0,.15); }
+.md-elevation-3{ box-shadow: 0px 1px 3px rgba(0,0,0,.3), 0px 4px 8px 3px rgba(0,0,0,.15); }
+.md-elevation-4{ box-shadow: 0px 2px 3px rgba(0,0,0,.3), 0px 6px 10px 4px rgba(0,0,0,.15); }
+.md-elevation-5{ box-shadow: 0px 4px 4px rgba(0,0,0,.3), 0px 8px 12px 6px rgba(0,0,0,.15); }
+
+.top-app-bar{ transition: box-shadow var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard); }
+.top-app-bar.is-elevated{ box-shadow: 0px 1px 2px rgba(0,0,0,.3), 0px 2px 6px 2px rgba(0,0,0,.15); }
+
+/* =========================================================================
+   Press ripple — a real expanding "state layer" circle from the exact
+   pointer position, triggered in js/app.js on pointerdown. Tints with the
+   element's own text color, so it automatically matches filled/tonal/plain
+   surfaces without extra classes.
+   ========================================================================= */
+.ripple-host{ position: relative; overflow: hidden; }
+.ripple{
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: var(--md-sys-state-pressed-opacity);
+  transform: scale(0);
+  pointer-events: none;
+  z-index: 4;
+  animation: ripple-out var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-emphasized-decelerate) forwards;
+}
+@keyframes ripple-out{
+  to{ transform: scale(1); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ripple{ display:none; }
+}
+
+/* Press feedback: cards squeeze slightly instead of just lifting on hover —
+   declared after the hover rules so it wins while the mouse button is down. */
+.post-card:active{
+  transform: scale(0.98) translateY(-1px);
+  border-radius: var(--md-sys-shape-corner-medium);
+  transition-duration: var(--md-sys-motion-duration-short2);
+}
+.featured:active{
+  transform: scale(0.99);
+  transition-duration: var(--md-sys-motion-duration-short2);
+}
+.tag-pill{ transition: transform var(--md-sys-motion-duration-short2) var(--ease-emphasized); }
+.post-card:active .tag-pill{ transform: scale(0.96); }
