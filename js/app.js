@@ -396,12 +396,54 @@
     }
 
     const fab = document.getElementById("fab-top");
-    if (fab) {
+    const appBar = document.querySelector(".top-app-bar");
+    if (fab || appBar) {
       window.addEventListener("scroll", () => {
-        fab.classList.toggle("is-visible", window.scrollY > 480);
-      });
+        if (fab) fab.classList.toggle("is-visible", window.scrollY > 480);
+        if (appBar) appBar.classList.toggle("is-elevated", window.scrollY > 4);
+      }, { passive: true });
+    }
+    if (fab) {
       fab.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     }
+
+    initRipple();
+  }
+
+  /* ---------------- Press ripple ----------------
+   * A real expanding "state layer" circle from the pointer's exact position,
+   * used on posts, buttons, chips, tabs and icon buttons — gives clear
+   * tactile feedback on tap/click, tinted with the element's own text color
+   * so it matches filled/tonal/plain surfaces automatically.
+   * --------------------------------------------- */
+  const RIPPLE_SELECTOR = ".post-card, .featured, .btn, .chip, .tab, .icon-btn, .fab";
+
+  function spawnRipple(el, x, y) {
+    el.classList.add("ripple-host");
+    const rect = el.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 1.8;
+    const span = document.createElement("span");
+    span.className = "ripple";
+    span.style.width = span.style.height = size + "px";
+    span.style.left = x - rect.left - size / 2 + "px";
+    span.style.top = y - rect.top - size / 2 + "px";
+    el.appendChild(span);
+    span.addEventListener("animationend", () => span.remove(), { once: true });
+    // Safety net in case animationend doesn't fire (e.g. element removed mid-animation)
+    setTimeout(() => span.remove(), 700);
+  }
+
+  function initRipple() {
+    document.addEventListener(
+      "pointerdown",
+      (e) => {
+        if (e.button !== undefined && e.button !== 0) return; // left click / touch only
+        const el = e.target.closest(RIPPLE_SELECTOR);
+        if (!el) return;
+        spawnRipple(el, e.clientX, e.clientY);
+      },
+      { passive: true }
+    );
   }
 
   document.addEventListener("DOMContentLoaded", () => {
