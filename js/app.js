@@ -8,6 +8,7 @@
   "use strict";
 
   const POSTS = window.POSTS || [];
+  const AUTHORS = window.AUTHORS || {};
 
   // Two top-level categories. Add more here if needed — everything else
   // (tabs, badges, filtering) picks these up automatically.
@@ -50,6 +51,20 @@
     const clean = (author || "?").replace(/^@/, "");
     const letters = clean.replace(/[^a-zA-Zа-яА-ЯёЁ0-9]/g, "");
     return (letters.slice(0, 2) || "??").toUpperCase();
+  }
+
+  /**
+   * Renders the contents of a .avatar circle: a real photo if this author
+   * has one registered in AUTHORS (data/posts.js), otherwise the usual
+   * two-letter initials.
+   */
+  function avatarFragment(author) {
+    const info = AUTHORS[author];
+    if (info && info.avatar) {
+      return `<img src="${escapeHtml(info.avatar)}" alt="" loading="lazy"
+        onerror="this.parentElement.textContent='${escapeHtml(initialsOf(author))}'">`;
+    }
+    return escapeHtml(initialsOf(author));
   }
 
   function allTags(posts) {
@@ -108,7 +123,7 @@
           <h3 class="post-card__title">${escapeHtml(post.title)}</h3>
           <p class="post-card__excerpt">${escapeHtml(post.excerpt)}</p>
           <div class="post-card__meta">
-            <span class="avatar">${escapeHtml(initialsOf(post.author))}</span>
+            <span class="avatar">${avatarFragment(post.author)}</span>
             <span>${escapeHtml(post.author || "аноним")}</span>
             <span class="sep">•</span>
             <span>${formatDate(post.date)}</span>
@@ -341,7 +356,7 @@
         <h1 class="article-title">${escapeHtml(post.title)}</h1>
         <div class="article-meta">
           <span class="article-meta__author">
-            <span class="avatar">${escapeHtml(initialsOf(post.author))}</span>
+            <span class="avatar">${avatarFragment(post.author)}</span>
             ${escapeHtml(post.author || "аноним")}
           </span>
           <span>•</span>
