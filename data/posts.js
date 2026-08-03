@@ -29,6 +29,10 @@
  * =============================================================================
  */
 
+const AUTHORS = {
+  "@ivanchela11": { avatar: "assets/avatars/ivanchela11.jpg" },
+};
+
 const POSTS = [
   {
     slug: "oneplus-16-speks",
