@@ -732,3 +732,92 @@ button{ font: inherit; color: inherit; }
 }
 .tag-pill{ transition: transform var(--md-sys-motion-duration-short2) var(--ease-emphasized); }
 .post-card:active .tag-pill{ transform: scale(0.96); }
+
+/* =========================================================================
+   Section nav (Посты / Устройства) — desktop link row in the app bar,
+   mirrored by the bottom-nav's third item on mobile.
+   ========================================================================= */
+.top-nav{ display:flex; gap: var(--sp-4); margin-right: var(--sp-16); }
+.top-nav a{
+  padding: 8px 16px; border-radius: var(--md-sys-shape-corner-full);
+  font: var(--md-sys-typescale-label-large); color: var(--md-sys-color-on-surface-variant);
+  text-decoration:none; transition: background var(--dur-short) var(--ease-standard), color var(--dur-short);
+}
+.top-nav a:hover{ background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent); }
+.top-nav a.active{ background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+@media (max-width: 767px){ .top-nav{ display:none; } }
+
+.hero--compact{ padding: 48px 0 40px; }
+.hero--compact .hero__inner{ display:block; }
+
+/* =========================================================================
+   Devices catalog grid + card
+   ========================================================================= */
+.device-grid{
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--sp-16); padding-bottom: var(--sp-32);
+}
+.post-card__badge--device{ background: color-mix(in srgb, var(--md-sys-color-surface-container-highest) 92%, transparent); color: var(--md-sys-color-on-surface); }
+.post-card.device-card::before{ background: var(--md-sys-color-secondary); }
+.device-card__swatches{ display:flex; gap: 6px; margin-top: var(--sp-4); }
+.swatch-dot{
+  width:16px; height:16px; border-radius:50%; flex:none;
+  border: 1px solid color-mix(in srgb, var(--md-sys-color-on-surface) 20%, transparent);
+}
+
+/* =========================================================================
+   Device detail page: gallery with a working color switcher + specs
+   ========================================================================= */
+.device-header{ padding: var(--sp-24) 0 0; }
+.device-layout{
+  display:grid; grid-template-columns: 1fr 1fr; gap: var(--sp-32);
+  align-items:start; margin-top: var(--sp-16);
+}
+@media (max-width: 767px){ .device-layout{ grid-template-columns: 1fr; } }
+
+.device-gallery__frame{
+  aspect-ratio: 1/1; border-radius: var(--md-sys-shape-corner-extra-large);
+  background: var(--md-sys-color-surface-container-high);
+}
+.device-gallery__frame .cover-frame__img{ transition: opacity var(--dur-short) var(--ease-standard); }
+
+.swatch-row{ display:flex; align-items:center; gap: var(--sp-12); margin-top: var(--sp-16); flex-wrap:wrap; }
+.swatch{
+  --swatch-color: var(--md-sys-color-outline);
+  width: 32px; height: 32px; border-radius: 50%; flex:none;
+  background: var(--swatch-color);
+  border: 2px solid var(--md-sys-color-surface);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--md-sys-color-on-surface) 25%, transparent);
+  cursor:pointer; padding:0;
+  transition: transform var(--dur-short) var(--ease-emphasized), box-shadow var(--dur-short) var(--ease-standard), border-radius 220ms var(--ease-emphasized);
+}
+.swatch:hover{ transform: scale(1.12); }
+.swatch:active{ border-radius: var(--md-sys-shape-corner-small); transform: scale(0.94); }
+.swatch.is-active{ box-shadow: 0 0 0 2px var(--md-sys-color-surface), 0 0 0 4px var(--swatch-color); transform: scale(1.08); }
+.swatch-label{ font: var(--md-sys-typescale-label-large); color: var(--md-sys-color-on-surface-variant); margin-left: var(--sp-8); }
+
+.device-info{ padding-top: var(--sp-4); }
+.category-pill--device{ background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.device-tagline{ font: var(--md-sys-typescale-title-medium); color: var(--md-sys-color-on-surface-variant); margin-top: var(--sp-8); }
+.device-description{ margin-top: var(--sp-16); color: var(--md-sys-color-on-surface); max-width: 56ch; }
+
+.specs{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--sp-16); margin: var(--sp-32) 0;
+}
+.specs-group{
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: var(--sp-16);
+}
+.specs-group h3{ font: var(--md-sys-typescale-title-small); color: var(--md-sys-color-primary); margin-bottom: var(--sp-12); }
+.specs-table{ margin:0; display:flex; flex-direction:column; gap: var(--sp-8); }
+.specs-row{
+  display:flex; justify-content:space-between; gap: var(--sp-16);
+  padding-bottom: var(--sp-8); border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  font: var(--md-sys-typescale-body-medium);
+}
+.specs-row:last-child{ border-bottom:none; padding-bottom:0; }
+.specs-row dt{ color: var(--md-sys-color-on-surface-variant); }
+.specs-row dd{ margin:0; color: var(--md-sys-color-on-surface); font-weight: 500; text-align:right; }
