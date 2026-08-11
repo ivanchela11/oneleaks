@@ -170,6 +170,249 @@
       .join("");
   }
 
+  /* ---------------- Footer (runs on every page) ---------------- */
+  function initFooter() {
+    renderFooterTagCloud(document.getElementById("footer-tagcloud"), POSTS);
+  }
+
+  /* =========================================================================
+     Devices — reads window.DEVICES (data/devices.js), same "edit one file"
+     philosophy as posts: a catalog grid (devices.html) and a detail page
+     (device.html) with a color switcher and grouped specs.
+     ========================================================================= */
+  const DEVICES = window.DEVICES || [];
+  const DEVICE_TYPES = {
+    "Смартфоны": { plural: ["смартфон", "смартфона", "смартфонов"] },
+    "Планшеты": { plural: ["планшет", "планшета", "планшетов"] },
+  };
+  function deviceTypePlural(type) {
+    return (DEVICE_TYPES[type] && DEVICE_TYPES[type].plural) || ["устройство", "устройства", "устройств"];
+  }
+
+  function deviceCoverFragment(device) {
+    const firstColor = (device.colors || [])[0];
+    if (!firstColor || !firstColor.image) {
+      return `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`;
+    }
+    const src = escapeHtml(firstColor.image);
+    return `
+      <div class="cover-frame__blur" style="background-image:url('${src}')" aria-hidden="true"></div>
+      <img src="${src}" alt="" loading="lazy" class="cover-frame__img">
+    `;
+  }
+
+  function deviceCardTemplate(device) {
+    const colorSwatches = (device.colors || [])
+      .slice(0, 5)
+      .map((c) => `<span class="swatch-dot" style="background:${escapeHtml(c.hex)}" title="${escapeHtml(c.name)}"></span>`)
+      .join("");
+    return `
+      <a class="post-card device-card" href="device.html?slug=${encodeURIComponent(device.slug)}">
+        <div class="post-card__media">
+          ${deviceCoverFragment(device)}
+          <span class="post-card__badge post-card__badge--device">${escapeHtml(device.status || device.category || "")}</span>
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__tags"><span class="tag-pill">${escapeHtml(device.category || "")}</span></div>
+          <h3 class="post-card__title">${escapeHtml(device.name)}</h3>
+          <p class="post-card__excerpt">${escapeHtml(device.tagline || "")}</p>
+          <div class="device-card__swatches">${colorSwatches}</div>
+        </div>
+      </a>`;
+  }
+
+  /* ---------------- Devices catalog page ---------------- */
+  function initDevices() {
+    const grid = document.getElementById("device-grid");
+    if (!grid) return;
+
+    const sorted = [...DEVICES];
+    const typeTabs = document.getElementById("device-category-tabs");
+    const searchInput = document.getElementById("device-search-input");
+    const countLabel = document.getElementById("device-result-count");
+    const emptyState = document.getElementById("device-empty-state");
+    const statsRow = document.getElementById("device-stats-row");
+
+    if (statsRow) {
+      const types = [...new Set(sorted.map((d) => d.category))];
+      const colorCount = sorted.reduce((n, d) => n + (d.colors ? d.colors.length : 0), 0);
+      statsRow.innerHTML = `
+        <div class="stat"><span class="stat__value">${sorted.length}</span><span class="stat__label">${pluralize(sorted.length, ["устройство", "устройства", "устройств"])}</span></div>
+        <div class="stat"><span class="stat__value">${types.length}</span><span class="stat__label">${pluralize(types.length, ["категория", "категории", "категорий"])}</span></div>
+        <div class="stat"><span class="stat__value">${colorCount}</span><span class="stat__label">${pluralize(colorCount, ["расцветка", "расцветки", "расцветок"])}</span></div>
+      `;
+    }
+
+    let activeType = null;
+    let query = "";
+
+    function makeTab(key, label, count) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tab";
+      btn.dataset.type = key || "";
+      btn.setAttribute("aria-selected", String(key === activeType));
+      btn.innerHTML = `${escapeHtml(label)} <span class="count">${count}</span>`;
+      return btn;
+    }
+    if (typeTabs) {
+      typeTabs.appendChild(makeTab(null, "Все", sorted.length));
+      [...new Set(sorted.map((d) => d.category))].forEach((type) => {
+        const count = sorted.filter((d) => d.category === type).length;
+        typeTabs.appendChild(makeTab(type, type, count));
+      });
+      typeTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab");
+        if (!btn) return;
+        activeType = btn.dataset.type || null;
+        [...typeTabs.children].forEach((c) => c.setAttribute("aria-selected", String(c === btn)));
+        render();
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        query = searchInput.value.trim().toLowerCase();
+        render();
+      });
+    }
+
+    function render() {
+      const filtered = sorted.filter((d) => {
+        const matchesType = !activeType || d.category === activeType;
+        const haystack = (d.name + " " + (d.tagline || "")).toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        return matchesType && matchesQuery;
+      });
+      grid.innerHTML = filtered.map(deviceCardTemplate).join("");
+      if (countLabel) countLabel.textContent = filtered.length + " " + pluralize(filtered.length, deviceTypePlural(activeType));
+      if (emptyState) emptyState.hidden = filtered.length !== 0;
+    }
+
+    render();
+  }
+
+  /* ---------------- Device detail page ---------------- */
+  function initDeviceDetail() {
+    const root = document.getElementById("device-root");
+    if (!root) return;
+
+    const params = new URLSearchParams(location.search);
+    const slug = params.get("slug");
+    const device = DEVICES.find((d) => d.slug === slug);
+
+    if (!device) {
+      root.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state__mark">${FALLBACK_COVER_ICON}</div>
+          <h2 style="font:var(--md-sys-typescale-title-large)">Устройство не найдено</h2>
+          <p>Похоже, эта карточка была удалена или ссылка неверна.</p>
+          <a class="btn btn--filled" href="devices.html">Ко всем устройствам</a>
+        </div>`;
+      return;
+    }
+
+    document.title = device.name + " — OneLeaks Forum";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && device.description) metaDesc.setAttribute("content", device.description);
+
+    const colors = device.colors || [];
+    const swatches = colors
+      .map(
+        (c, i) => `
+        <button type="button" class="swatch ${i === 0 ? "is-active" : ""}" data-index="${i}"
+                style="--swatch-color:${escapeHtml(c.hex)}" aria-label="${escapeHtml(c.name)}" title="${escapeHtml(c.name)}">
+        </button>`
+      )
+      .join("");
+
+    const specsHtml = (device.specs || [])
+      .map(
+        (group) => `
+        <div class="specs-group">
+          <h3>${escapeHtml(group.group)}</h3>
+          <dl class="specs-table">
+            ${group.items.map((it) => `<div class="specs-row"><dt>${escapeHtml(it.label)}</dt><dd>${escapeHtml(it.value)}</dd></div>`).join("")}
+          </dl>
+        </div>`
+      )
+      .join("");
+
+    root.innerHTML = `
+      <div class="device-header">
+        <a class="back-link" href="devices.html">
+          <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
+          Ко всем устройствам
+        </a>
+      </div>
+
+      <div class="device-layout">
+        <div class="device-gallery">
+          <div class="device-gallery__frame cover-frame" id="device-gallery-frame">
+            ${
+              colors[0]
+                ? `<div class="cover-frame__blur" id="device-gallery-blur" style="background-image:url('${escapeHtml(colors[0].image)}')" aria-hidden="true"></div>
+                   <img src="${escapeHtml(colors[0].image)}" alt="${escapeHtml(device.name)}" id="device-gallery-img" class="cover-frame__img">`
+                : `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`
+            }
+          </div>
+          ${
+            colors.length
+              ? `<div class="swatch-row">
+                  ${swatches}
+                  <span class="swatch-label" id="swatch-label">${escapeHtml(colors[0].name)}</span>
+                </div>`
+              : ""
+          }
+        </div>
+
+        <div class="device-info">
+          <span class="category-pill category-pill--device">${escapeHtml(device.status || device.category || "")}</span>
+          <h1 class="article-title">${escapeHtml(device.name)}</h1>
+          <p class="device-tagline">${escapeHtml(device.tagline || "")}</p>
+          ${device.description ? `<p class="device-description">${escapeHtml(device.description)}</p>` : ""}
+        </div>
+      </div>
+
+      <div class="specs" id="specs">${specsHtml}</div>
+      <div id="device-related-slot"></div>
+    `;
+
+    // Color switcher: click a swatch, swap the gallery image (and its
+    // blurred backdrop) plus the caption — no page reload, no extra assets.
+    const galleryImg = document.getElementById("device-gallery-img");
+    const galleryBlur = document.getElementById("device-gallery-blur");
+    const swatchLabel = document.getElementById("swatch-label");
+    root.querySelectorAll(".swatch").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const color = colors[Number(btn.dataset.index)];
+        if (!color) return;
+        root.querySelectorAll(".swatch").forEach((s) => s.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        if (galleryImg) galleryImg.src = color.image;
+        if (galleryBlur) galleryBlur.style.backgroundImage = `url('${color.image}')`;
+        if (swatchLabel) swatchLabel.textContent = color.name;
+      });
+    });
+
+    // Related posts: any post whose tags overlap with this device's
+    // relatedTags (set in data/devices.js).
+    const relatedTags = device.relatedTags || [];
+    const related = relatedTags.length
+      ? POSTS.filter((p) => (p.tags || []).some((t) => relatedTags.includes(t)))
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 3)
+      : [];
+    const relatedSlot = document.getElementById("device-related-slot");
+    if (relatedSlot && related.length) {
+      relatedSlot.innerHTML = `
+        <section class="related">
+          <h2>Посты про ${escapeHtml(device.name)}</h2>
+          <div class="related__grid">${related.map(cardTemplate).join("")}</div>
+        </section>`;
+    }
+  }
+
   /* ---------------- Home page ---------------- */
   function initHome() {
     const grid = document.getElementById("post-grid");
@@ -186,7 +429,6 @@
     renderStats(document.getElementById("stats-row"), sorted);
     const featuredEl = document.getElementById("featured-post");
     if (featuredEl && sorted[0]) featuredEl.innerHTML = featuredTemplate(sorted[0]);
-    renderFooterTagCloud(document.getElementById("footer-tagcloud"), sorted);
 
     let activeCategory = null; // null = all
     let activeTag = null;
@@ -431,7 +673,7 @@
    * tactile feedback on tap/click, tinted with the element's own text color
    * so it matches filled/tonal/plain surfaces automatically.
    * --------------------------------------------- */
-  const RIPPLE_SELECTOR = ".post-card, .featured, .btn, .chip, .tab, .icon-btn, .fab";
+  const RIPPLE_SELECTOR = ".post-card, .featured, .btn, .chip, .tab, .icon-btn, .fab, .swatch";
 
   function spawnRipple(el, x, y) {
     el.classList.add("ripple-host");
@@ -465,5 +707,8 @@
     initChrome();
     initHome();
     initPost();
+    initDevices();
+    initDeviceDetail();
+    initFooter();
   });
 })();
