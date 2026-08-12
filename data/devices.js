@@ -25,53 +25,53 @@
 
 const DEVICES = [
   {
-    slug: "oneplus-16",
-    name: "OnePlus 16",
-    tagline: "Флагман нового поколения",
-    status: "Слухи",
+    slug: "oneplus-15",
+    name: "OnePlus 15",
+    tagline: "Флагман с упором в производительность.",
+    status: "Продажа",
     category: "Смартфоны",
-    releaseDate: "2026-09",
+    releaseDate: "2025-10",
     colors: [
-      { name: "Штормовой чёрный", hex: "#2A2A2E", image: "assets/devices/oneplus-16-storm-black.svg" },
-      { name: "Ледниковый серебристый", hex: "#D8DBDE", image: "assets/devices/oneplus-16-glacier-silver.svg" },
-      { name: "Закатный красный", hex: "#B3223A", image: "assets/devices/oneplus-16-sunset-red.svg" },
+      { name: "Sand Storm", hex: "#F5F2DF", image: "assets/devices/oneplus15/white.png" },
+      { name: "Infinity Black", hex: "#1A1F26", image: "assets/devices/oneplus15/15-black.png" },
+      { name: "Ultra Violet", hex: "#DDD3E1", image: "assets/devices/oneplus15/15-purple.png" },
     ],
     description:
-      "По утечкам, OnePlus 16 — самый ёмкий и быстрый OnePlus за всю историю линейки: батарея на 9000 мАч, экран 185 Гц и чип на 2 нм. Официально не анонсирован, все характеристики ниже — по данным утечек.",
-    relatedTags: ["OnePlus 16", "Номерная линейка"],
+      "OnePlus 15 — это мощный флагманский смартфон с рекордной автономностью и упором на высокую скорость работы.",
+    relatedTags: ["OnePlus 15", "Номерная линейка"],
     specs: [
       {
         group: "Экран",
         items: [
           { label: "Диагональ", value: "6.78\"" },
           { label: "Тип матрицы", value: "LTPO AMOLED (BOE)" },
-          { label: "Частота обновления", value: "185 Гц" },
-          { label: "Пиковая яркость", value: "6000+ нит" },
+          { label: "Частота обновления", value: "165 Гц" },
+          { label: "Яркость", value: "1800 нит." },
           { label: "ШИМ", value: "3840 Гц" },
         ],
       },
       {
         group: "Производительность",
         items: [
-          { label: "Чипсет", value: "Snapdragon 8 Elite Gen 6 Pro (2 нм)" },
-          { label: "Частота ядер", value: "до 5.0 ГГц" },
-          { label: "Память", value: "LPDDR6" },
-          { label: "ОС", value: "Android 17 / ColorOS 17" },
+          { label: "Чипсет", value: "Snapdragon 8 Elite Gen 5 (3 нм)" },
+          { label: "Частота ядер", value: "до 4.61 ГГц" },
+          { label: "Память", value: "LPDDR5X Ultra/Ultra+" },
+          { label: "ОС", value: "OxygenOS 16 / ColorOS 16" },
         ],
       },
       {
         group: "Камеры",
         items: [
-          { label: "Основной сенсор", value: "200 Мп" },
+          { label: "Основной сенсор", value: "50 Мп" },
           { label: "Ультраширик", value: "50 Мп" },
-          { label: "Перископ", value: "50 Мп, 3.5x зум" },
+          { label: "Телефото", value: "50 Мп, 3.5x зум" },
           { label: "Видео", value: "4K/120fps" },
         ],
       },
       {
         group: "Батарея и зарядка",
         items: [
-          { label: "Ёмкость", value: "9000 мАч (кремний-углерод)" },
+          { label: "Ёмкость", value: "7300 мАч (кремний-углерод)" },
           { label: "Проводная зарядка", value: "120 Вт" },
           { label: "Беспроводная зарядка", value: "50 Вт" },
         ],
