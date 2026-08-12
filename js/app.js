@@ -189,8 +189,14 @@
     return (DEVICE_TYPES[type] && DEVICE_TYPES[type].plural) || ["устройство", "устройства", "устройств"];
   }
 
-  function deviceCoverFragment(device) {
-    const firstColor = (device.colors || [])[0];
+  /** Picks the region to show by default: "global" if present, else the first one. */
+  function primaryRegion(device) {
+    const regions = device.regions || [];
+    return regions.find((r) => r.key === "global") || regions[0] || {};
+  }
+
+  function deviceCoverFragment(region) {
+    const firstColor = (region.colors || [])[0];
     if (!firstColor || !firstColor.image) {
       return `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`;
     }
@@ -202,21 +208,28 @@
   }
 
   function deviceCardTemplate(device) {
-    const colorSwatches = (device.colors || [])
+    const regions = device.regions || [];
+    const region = primaryRegion(device);
+    const colorSwatches = (region.colors || [])
       .slice(0, 5)
       .map((c) => `<span class="swatch-dot" style="background:${escapeHtml(c.hex)}" title="${escapeHtml(c.name)}"></span>`)
       .join("");
+    const regionNote =
+      regions.length > 1
+        ? `<div class="device-card__regions">${regions.map((r) => `<span class="region-tag">${escapeHtml(r.label)}</span>`).join("")}</div>`
+        : "";
     return `
       <a class="post-card device-card" href="device.html?slug=${encodeURIComponent(device.slug)}">
         <div class="post-card__media">
-          ${deviceCoverFragment(device)}
-          <span class="post-card__badge post-card__badge--device">${escapeHtml(device.status || device.category || "")}</span>
+          ${deviceCoverFragment(region)}
+          <span class="post-card__badge post-card__badge--device">${escapeHtml(region.status || device.category || "")}</span>
         </div>
         <div class="post-card__body">
           <div class="post-card__tags"><span class="tag-pill">${escapeHtml(device.category || "")}</span></div>
-          <h3 class="post-card__title">${escapeHtml(device.name)}</h3>
-          <p class="post-card__excerpt">${escapeHtml(device.tagline || "")}</p>
+          <h3 class="post-card__title">${escapeHtml(region.name)}</h3>
+          <p class="post-card__excerpt">${escapeHtml(region.tagline || "")}</p>
           <div class="device-card__swatches">${colorSwatches}</div>
+          ${regionNote}
         </div>
       </a>`;
   }
@@ -235,7 +248,7 @@
 
     if (statsRow) {
       const types = [...new Set(sorted.map((d) => d.category))];
-      const colorCount = sorted.reduce((n, d) => n + (d.colors ? d.colors.length : 0), 0);
+      const colorCount = sorted.reduce((n, d) => n + (d.regions || []).reduce((m, r) => m + (r.colors ? r.colors.length : 0), 0), 0);
       statsRow.innerHTML = `
         <div class="stat"><span class="stat__value">${sorted.length}</span><span class="stat__label">${pluralize(sorted.length, ["устройство", "устройства", "устройств"])}</span></div>
         <div class="stat"><span class="stat__value">${types.length}</span><span class="stat__label">${pluralize(types.length, ["категория", "категории", "категорий"])}</span></div>
@@ -280,7 +293,12 @@
     function render() {
       const filtered = sorted.filter((d) => {
         const matchesType = !activeType || d.category === activeType;
-        const haystack = (d.name + " " + (d.tagline || "")).toLowerCase();
+        // Search across every region's name/tagline, so "Ace 6" finds a
+        // device even though its card shows the Global name by default.
+        const haystack = (d.regions || [])
+          .map((r) => `${r.name} ${r.tagline || ""}`)
+          .join(" ")
+          .toLowerCase();
         const matchesQuery = !query || haystack.includes(query);
         return matchesType && matchesQuery;
       });
@@ -312,31 +330,25 @@
       return;
     }
 
-    document.title = device.name + " — OneLeaks Forum";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc && device.description) metaDesc.setAttribute("content", device.description);
+    const regions = device.regions || [];
+    const requestedKey = params.get("region");
+    let activeRegionKey = (regions.find((r) => r.key === requestedKey) || primaryRegion(device)).key;
 
-    const colors = device.colors || [];
-    const swatches = colors
-      .map(
-        (c, i) => `
-        <button type="button" class="swatch ${i === 0 ? "is-active" : ""}" data-index="${i}"
-                style="--swatch-color:${escapeHtml(c.hex)}" aria-label="${escapeHtml(c.name)}" title="${escapeHtml(c.name)}">
-        </button>`
-      )
-      .join("");
-
-    const specsHtml = (device.specs || [])
-      .map(
-        (group) => `
-        <div class="specs-group">
-          <h3>${escapeHtml(group.group)}</h3>
-          <dl class="specs-table">
-            ${group.items.map((it) => `<div class="specs-row"><dt>${escapeHtml(it.label)}</dt><dd>${escapeHtml(it.value)}</dd></div>`).join("")}
-          </dl>
-        </div>`
-      )
-      .join("");
+    // Static shell: region tabs + a mount point that gets fully re-rendered
+    // by renderRegion() below, both on first load and every time the
+    // person switches Global <-> China (colors/specs/related posts can all
+    // differ, so we just re-render the whole region-dependent chunk).
+    const regionTabsHtml =
+      regions.length > 1
+        ? `<div class="category-tabs region-tabs" id="region-tabs" role="tablist" aria-label="Регион">
+            ${regions
+              .map(
+                (r) =>
+                  `<button type="button" class="tab" data-region="${escapeHtml(r.key)}" aria-selected="${r.key === activeRegionKey}">${escapeHtml(r.label)}</button>`
+              )
+              .join("")}
+          </div>`
+        : "";
 
     root.innerHTML = `
       <div class="device-header">
@@ -344,73 +356,126 @@
           <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></svg>
           Ко всем устройствам
         </a>
+        ${regionTabsHtml}
       </div>
-
-      <div class="device-layout">
-        <div class="device-gallery">
-          <div class="device-gallery__frame cover-frame" id="device-gallery-frame">
-            ${
-              colors[0]
-                ? `<div class="cover-frame__blur" id="device-gallery-blur" style="background-image:url('${escapeHtml(colors[0].image)}')" aria-hidden="true"></div>
-                   <img src="${escapeHtml(colors[0].image)}" alt="${escapeHtml(device.name)}" id="device-gallery-img" class="cover-frame__img">`
-                : `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`
-            }
-          </div>
-          ${
-            colors.length
-              ? `<div class="swatch-row">
-                  ${swatches}
-                  <span class="swatch-label" id="swatch-label">${escapeHtml(colors[0].name)}</span>
-                </div>`
-              : ""
-          }
-        </div>
-
-        <div class="device-info">
-          <span class="category-pill category-pill--device">${escapeHtml(device.status || device.category || "")}</span>
-          <h1 class="article-title">${escapeHtml(device.name)}</h1>
-          <p class="device-tagline">${escapeHtml(device.tagline || "")}</p>
-          ${device.description ? `<p class="device-description">${escapeHtml(device.description)}</p>` : ""}
-        </div>
-      </div>
-
-      <div class="specs" id="specs">${specsHtml}</div>
-      <div id="device-related-slot"></div>
+      <div id="device-region-mount"></div>
     `;
 
-    // Color switcher: click a swatch, swap the gallery image (and its
-    // blurred backdrop) plus the caption — no page reload, no extra assets.
-    const galleryImg = document.getElementById("device-gallery-img");
-    const galleryBlur = document.getElementById("device-gallery-blur");
-    const swatchLabel = document.getElementById("swatch-label");
-    root.querySelectorAll(".swatch").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const color = colors[Number(btn.dataset.index)];
-        if (!color) return;
-        root.querySelectorAll(".swatch").forEach((s) => s.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        if (galleryImg) galleryImg.src = color.image;
-        if (galleryBlur) galleryBlur.style.backgroundImage = `url('${color.image}')`;
-        if (swatchLabel) swatchLabel.textContent = color.name;
+    const regionTabs = document.getElementById("region-tabs");
+    if (regionTabs) {
+      regionTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab");
+        if (!btn) return;
+        activeRegionKey = btn.dataset.region;
+        [...regionTabs.children].forEach((c) => c.setAttribute("aria-selected", String(c === btn)));
+        const url = new URL(location.href);
+        url.searchParams.set("region", activeRegionKey);
+        history.replaceState(null, "", url);
+        renderRegion(activeRegionKey);
       });
-    });
-
-    // Related posts: any post whose tags overlap with this device's
-    // relatedTags (set in data/devices.js).
-    const relatedTags = device.relatedTags || [];
-    const related = relatedTags.length
-      ? POSTS.filter((p) => (p.tags || []).some((t) => relatedTags.includes(t)))
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 3)
-      : [];
-    const relatedSlot = document.getElementById("device-related-slot");
-    if (relatedSlot && related.length) {
-      relatedSlot.innerHTML = `
-        <section class="related">
-          <h2>Посты про ${escapeHtml(device.name)}</h2>
-          <div class="related__grid">${related.map(cardTemplate).join("")}</div>
-        </section>`;
     }
+
+    function renderRegion(key) {
+      const region = regions.find((r) => r.key === key) || regions[0] || {};
+      const mount = document.getElementById("device-region-mount");
+      if (!mount) return;
+
+      document.title = region.name + " — OneLeaks Forum";
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && region.description) metaDesc.setAttribute("content", region.description);
+
+      const colors = region.colors || [];
+      const swatches = colors
+        .map(
+          (c, i) => `
+          <button type="button" class="swatch ${i === 0 ? "is-active" : ""}" data-index="${i}"
+                  style="--swatch-color:${escapeHtml(c.hex)}" aria-label="${escapeHtml(c.name)}" title="${escapeHtml(c.name)}">
+          </button>`
+        )
+        .join("");
+
+      const specsHtml = (region.specs || [])
+        .map(
+          (group) => `
+          <div class="specs-group">
+            <h3>${escapeHtml(group.group)}</h3>
+            <dl class="specs-table">
+              ${group.items.map((it) => `<div class="specs-row"><dt>${escapeHtml(it.label)}</dt><dd>${escapeHtml(it.value)}</dd></div>`).join("")}
+            </dl>
+          </div>`
+        )
+        .join("");
+
+      mount.innerHTML = `
+        <div class="device-layout">
+          <div class="device-gallery">
+            <div class="device-gallery__frame cover-frame" id="device-gallery-frame">
+              ${
+                colors[0]
+                  ? `<div class="cover-frame__blur" id="device-gallery-blur" style="background-image:url('${escapeHtml(colors[0].image)}')" aria-hidden="true"></div>
+                     <img src="${escapeHtml(colors[0].image)}" alt="${escapeHtml(region.name)}" id="device-gallery-img" class="cover-frame__img">`
+                  : `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`
+              }
+            </div>
+            ${
+              colors.length
+                ? `<div class="swatch-row">
+                    ${swatches}
+                    <span class="swatch-label" id="swatch-label">${escapeHtml(colors[0].name)}</span>
+                  </div>`
+                : ""
+            }
+          </div>
+
+          <div class="device-info">
+            <span class="category-pill category-pill--device">${escapeHtml(region.status || device.category || "")}</span>
+            <h1 class="article-title">${escapeHtml(region.name)}</h1>
+            <p class="device-tagline">${escapeHtml(region.tagline || "")}</p>
+            ${region.description ? `<p class="device-description">${escapeHtml(region.description)}</p>` : ""}
+          </div>
+        </div>
+
+        <div class="specs">${specsHtml}</div>
+        <div id="device-related-slot"></div>
+      `;
+
+      // Color switcher: click a swatch, swap the gallery image (and its
+      // blurred backdrop) plus the caption — no page reload.
+      const galleryImg = document.getElementById("device-gallery-img");
+      const galleryBlur = document.getElementById("device-gallery-blur");
+      const swatchLabel = document.getElementById("swatch-label");
+      mount.querySelectorAll(".swatch").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const color = colors[Number(btn.dataset.index)];
+          if (!color) return;
+          mount.querySelectorAll(".swatch").forEach((s) => s.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          if (galleryImg) galleryImg.src = color.image;
+          if (galleryBlur) galleryBlur.style.backgroundImage = `url('${color.image}')`;
+          if (swatchLabel) swatchLabel.textContent = color.name;
+        });
+      });
+
+      // Related posts: any post whose tags overlap with this region's
+      // relatedTags (set in data/devices.js) — Global/China can point at
+      // different posts.
+      const relatedTags = region.relatedTags || [];
+      const related = relatedTags.length
+        ? POSTS.filter((p) => (p.tags || []).some((t) => relatedTags.includes(t)))
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 3)
+        : [];
+      const relatedSlot = document.getElementById("device-related-slot");
+      if (relatedSlot && related.length) {
+        relatedSlot.innerHTML = `
+          <section class="related">
+            <h2>Посты про ${escapeHtml(region.name)}</h2>
+            <div class="related__grid">${related.map(cardTemplate).join("")}</div>
+          </section>`;
+      }
+    }
+
+    renderRegion(activeRegionKey);
   }
 
   /* ---------------- Home page ---------------- */
