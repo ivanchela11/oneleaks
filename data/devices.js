@@ -36,8 +36,8 @@ const DEVICES = [
         status: "Продажа",
         colors: [
           { name: "Sand Storm", hex: "#F5F2DF", image: "assets/devices/oneplus15/white.png" },
-          { name: "Infinity Black", hex: "#1A1F26", image: "assets/devices/oneplus15/15-black.png" },
-          { name: "Ultra Violet", hex: "#DDD3E1", image: "assets/devices/oneplus15/15-purple.png" },
+          { name: "Infinity Black", hex: "#1A1F26", image: "assets/devices/oneplus15/black.png" },
+          { name: "Ultra Violet", hex: "#DDD3E1", image: "assets/devices/oneplus15/purple.png" },
         ],
         description:
           "OnePlus 15 — это мощный флагманский смартфон с рекордной автономностью и упором на высокую скорость работы.",
@@ -102,9 +102,9 @@ const DEVICES = [
       tagline: "Флагман со Snapdragon 8 Elite, дисплеем ProXDR и тройной камерой Hasselblad.",
       status: "Продажа",
       colors: [
-        { name: "Midnight Ocean", hex: "#173A4A", image: "assets/data/devices/oneplus13/13-blue.png" },
-        { name: "Arctic Dawn", hex: "#E8E8E3", image: "assets/data/devices/oneplus13/13-white.png" },
-        { name: "Black Eclipse", hex: "#17191B", image: "assets/data/devices/oneplus13/13-black.png" }
+        { name: "Midnight Ocean", hex: "#173A4A", image: "assets/data/devices/oneplus13/blue.png" },
+        { name: "Arctic Dawn", hex: "#E8E8E3", image: "assets/data/devices/oneplus13/white.png" },
+        { name: "Black Eclipse", hex: "#17191B", image: "assets/data/devices/oneplus13/black.png" }
       ],
       description: "Флагманский смартфон OnePlus с 6,82-дюймовым QHD+ LTPO 4.1 AMOLED-дисплеем ProXDR, платформой Snapdragon 8 Elite, тройной камерой Hasselblad 50 Мп, аккумулятором 6000 мА·ч и защитой IP68/IP69. Глобальная версия работает на OxygenOS 15 на базе Android 15.",
       relatedTags: null,
