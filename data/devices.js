@@ -91,6 +91,71 @@ const DEVICES = [
       },
     ],
   },
+  {
+  slug: "oneplus-15t",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus 15T",
+      tagline: "Компактный флагман со Snapdragon 8 Elite Gen 5, экраном 165 Гц и батареей 7500 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Healing White Chocolate", hex: "#F0F0EC", image: "assets/devices/oneplus15t/white.png" },
+        { name: "Pure Cocoa", hex: "#4F4547", image: "assets/devices/oneplus15t/brown.png" },
+        { name: "Relaxing Matcha", hex: "#B8CE93", image: "assets/devices/oneplus15t/green.png" }
+      ],
+      description: "Компактный китайский флагман OnePlus с 6,32-дюймовым LTPO AMOLED-дисплеем разрешением 1216 × 2640 пикселей и частотой обновления до 165 Гц, чипсетом Snapdragon 8 Elite Gen 5, аккумулятором 7500 мА·ч, проводной зарядкой 100 Вт, беспроводной зарядкой 50 Вт и ColorOS 16. ",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,32 дюйма" },
+            { label: "Тип матрицы", value: "LTPO AMOLED, 1,07 млрд цветов, Dolby Vision, HDR10+, HDR Vivid" },
+            { label: "Частота обновления", value: "До 165 Гц, адаптивная" },
+            { label: "Яркость", value: "До 3600 нит" },
+            { label: "ШИМ", value: "3840 ГЦ" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Elite Gen 5" },
+            { label: "Частота ядер", value: "4,61 ГЦ" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X Ultra Pro, 256/512 ГБ или 1 ТБ UFS 4.1" },
+            { label: "ОС", value: "ColorOS 16 на базе Android 16" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony, 1/1,56 дюйма, OIS" },
+            { label: "Телефото", value: "50 Мп, перископический модуль, 3,5× оптический зум, OIS" },
+            { label: "Видео", value: "До 8K 60 к/с; 4K 120 к/с; Dolby Vision" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "7500 мА·ч" },
+            { label: "Проводная зарядка", value: "100 Вт SUPERVOOC" },
+            { label: "Беспроводная зарядка", value: "50 Вт" }
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP68/IP69K" },
+            { label: "Сканер отпечатка", value: "Ультразвуковой, под экраном" },
+            { label: "Дополнительные функции", value: "Qi2 и магнитные аксессуары, игровые оптимизации, 3200 Гц мгновенная частота сенсорного отклика, NFC, 5G" }
+          ],
+        },
+      ],
+    },
+  ],
+},
 {
   slug: "oneplus-13",
   category: "Смартфоны",
