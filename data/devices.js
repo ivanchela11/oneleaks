@@ -157,6 +157,128 @@ const DEVICES = [
   ],
 },
 {
+  slug: "oneplus-15r-ace-6t",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "global",
+      label: "Global",
+      name: "OnePlus 15R",
+      tagline: "Игровой субфлагман со Snapdragon 8 Gen 5, дисплеем 165 Гц и батареей 7400 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Mint Breeze", hex: "#ECF8E0", image: "assets/devices/oneplusace6t/green.png" },
+        { name: "Charcoal Black", hex: "#494B4D", image: "assets/devices/oneplusace6t/black.png" }
+      ],
+      description: "Глобальная версия OnePlus 15R с 6,83-дюймовым AMOLED-дисплеем разрешением 1.5K и частотой обновления до 165 Гц, чипсетом Snapdragon 8 Gen 5, аккумулятором 7400 мА·ч, зарядкой 80 Вт SUPERVOOC и OxygenOS 16. ",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,83 дюйма" },
+            { label: "Тип матрицы", value: "AMOLED, 1.5K, 10 бит, HDR10+, Dolby Vision" },
+            { label: "Частота обновления", value: "До 165 Гц" },
+            { label: "Яркость", value: "До 3600 нит" },
+            { label: "ШИМ", value: "3640Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 5" },
+            { label: "Частота ядер", value: "Не указано" },
+            { label: "Память", value: "12 ГБ LPDDR5X Ultra, 256/512 ГБ UFS 4.1" },
+            { label: "ОС", value: "OxygenOS 16" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony IMX906, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, угол обзора 112°" },
+            { label: "Видео", value: "До 4K 120 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "7400 мА·ч" },
+            { label: "Проводная зарядка", value: "80 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "Не указано" },
+            { label: "Сканер отпечатка", value: "Ультразвуковой, под экраном" },
+            { label: "Дополнительные функции", value: "Always-on 120 FPS в поддерживаемых играх, игровые оптимизации, Wi‑Fi 7, NFC, 5G" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus Ace 6T",
+      tagline: "Игровой смартфон со Snapdragon 8 Gen 5, экраном 165 Гц и батареей 8300 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Shifting Green", hex: "#ECF8E0", image: "assets/devices/oneplusace6t/green.png" },
+        { name: "Electric Purple", hex: "#D5D1E9", image: "assets/devices/oneplusace6t/purple.png" },
+        { name: "Flash Black", hex: "#494B4D", image: "assets/devices/oneplusace6t/black.png" },
+        { name: "Genshin Impact Edition", hex: "DCE8F1", image: "assets/devices/oneplusace6t/genshin.png" }
+      ],
+      description: "Китайская версия OnePlus Ace 6T с 6,83-дюймовым 1.5K AMOLED-дисплеем с частотой обновления 165 Гц, Snapdragon 8 Gen 5, аккумулятором 8300 мА·ч, зарядкой 100 Вт, тройной системой игровых чипов и ColorOS 16. ",
+      relatedTags: null
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,83 дюйма" },
+            { label: "Тип матрицы", value: "AMOLED, 1.5K, плоский экран" },
+            { label: "Частота обновления", value: "До 165 Гц" },
+            { label: "Яркость", value: "1800 нит глобальной максимальной яркости; 3600 нит при 25% APL" },
+            { label: "ШИМ", value: "3840Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 5" },
+            { label: "Частота ядер", value: "3,8 ГГц" },
+            { label: "Память", value: "LPDDR5X Ultra 9600 Мбит/с, 256/512 ГБ или 1 ТБ UFS 4.1" },
+            { label: "ОС", value: "ColorOS 16" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony IMX906, 1/1,56 дюйма, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, f/2.2" },
+            { label: "Видео", value: "4K/120FPS" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "8300 мА·ч типичная, 8070 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "100 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP66/IP68/IP69/IP69K" },
+            { label: "Сканер отпечатка", value: "Ультразвуковой, под экраном" },
+            { label: "Дополнительные функции", value: "Три игровых чипа, Wi‑Fi-чип, 3200 Гц мгновенная частота сенсорного отклика, обходная зарядка, NFC, 5G" }
+          ],
+        },
+      ],
+    },
+  ],
+},
+{
   slug: "oneplus-13",
   category: "Смартфоны",
   regions: [
