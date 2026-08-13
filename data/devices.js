@@ -158,6 +158,129 @@ const DEVICES = [
   ],
 },
   {
+  slug: "oneplus-13r-ace-5",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "global",
+      label: "Global",
+      name: "OnePlus 13R",
+      tagline: "Субфлагман с Snapdragon 8 Gen 3, LTPO-дисплеем ProXDR и телефотокамерой.",
+      status: "Продажа",
+      colors: [
+        { name: "Astral Trail", hex: "#EFE6E3", image: "assets/devices/oneplus13r/white.png" },
+        { name: "Nebula Noir", hex: "#44454A", image: "assets/devices/oneplus13r/black.png" }
+      ],
+      description: "Глобальная версия OnePlus 13R с 6,78-дюймовым LTPO 4.1 AMOLED-дисплеем ProXDR, платформой Snapdragon 8 Gen 3, тройной камерой с 2-кратным телефотообъективом, аккумулятором 6000 мА·ч и OxygenOS 15 на базе Android 15.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,78 дюйма" },
+            { label: "Тип матрицы", value: "LTPO 4.1 AMOLED, ProXDR, 10 бит, 100% Display P3" },
+            { label: "Частота обновления", value: "1–120 Гц, динамическая" },
+            { label: "Яркость", value: "1600 нит HBM, до 4500 нит пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц PWM; поддерживается DC-затемнение на всех уровнях яркости" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 3" },
+            { label: "Частота ядер", value: "До 3,3 ГГц" },
+            { label: "Память", value: "12 ГБ LPDDR5X, 256 ГБ UFS 4.0" },
+            { label: "ОС", value: "OxygenOS 15.0 на базе Android 15" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony LYT-700, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, f/2.2, угол обзора 112°" },
+            { label: "Телефото", value: "50 Мп, Samsung S5KJN5, 2× оптический зум" },
+            { label: "Видео", value: "До 4K 60 к/с; замедленная съёмка до 1080p 240 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "6000 мА·ч, типичная; 5860 мА·ч, номинальная" },
+            { label: "Проводная зарядка", value: "80 Вт SUPERVOOC" }
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Wi‑Fi 7, Bluetooth 5.4, NFC, ИК-порт, Alert Slider, стереодинамики" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus Ace 5",
+      tagline: "Производительный смартфон с Snapdragon 8 Gen 3, 1.5K-дисплеем и батареей Glacier.",
+      status: "Продажа",
+      colors: [
+        { name: "Full Speed Black", hex: "#44454A", image: "assets/devices/oneplus13r/black.png" },
+        { name: "Titanium Grey", hex: "#EFE6E3", image: "assets/devices/oneplus13r/white.png" },
+        { name: "Celestial Porcelain", hex: "#D7E0D4", image: "assets/devices/oneplusace5/green.png" }
+      ],
+      description: "Китайская версия OnePlus Ace 5 с 6,78-дюймовым AMOLED-дисплеем разрешением 1.5K, платформой Snapdragon 8 Gen 3, тройной основной камерой, аккумулятором типичной ёмкостью 6415 мА·ч и ColorOS 15 на базе Android.",
+      relatedTags: ["OnePlus Ace 5", "OnePlus", "Ace"],
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,78 дюйма" },
+            { label: "Тип матрицы", value: "AMOLED, плоский экран, 10 бит, 100% DCI-P3" },
+            { label: "Частота обновления", value: "1–120 Гц, интеллектуальное переключение" },
+            { label: "Яркость", value: "800 нит глобальной типичной яркости, до 1600 нит типичной пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц PWM; поддерживается DC-затемнение на всех уровнях яркости" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 3" },
+            { label: "Частота ядер", value: "До 3,3 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ или 1 ТБ UFS 4.0" },
+            { label: "ОС", value: "ColorOS 15.0" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, f/1.8, автофокус, двухосевая OIS" },
+            { label: "Ультраширик", value: "8 Мп, f/2.2, угол обзора 112°" },
+            { label: "Телефото", value: "Не указано; оптический зум не поддерживается" },
+            { label: "Видео", value: "До 4K 60 к/с; замедленная съёмка до 1080p 240 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "6415 мА·ч типичная, 6285 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "80 Вт SUPERVOOC" }
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Wi‑Fi 7, Bluetooth 5.4, NFC, ИК-порт, X‑осевой линейный вибромотор, стереодинамики" }
+          ],
+        },
+      ],
+    },
+  ],
+},
+  {
     slug: "oneplus-pad-3",
     name: "OnePlus Pad 3",
     tagline: "Планшет для работы и медиа",
