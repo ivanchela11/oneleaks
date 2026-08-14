@@ -279,6 +279,70 @@ const DEVICES = [
   ],
 },
 {
+  slug: "oneplus-ace-6",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus Ace 6",
+      tagline: "Игровой смартфон со Snapdragon 8 Elite, экраном 165 Гц и батареей 7800 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Quick Silver", hex: "#E5E5E8", image: "assets/devices/oneplusace6/silver.png" },
+        { name: "Racing Black", hex: "#2F363E", image: "assets/devices/oneplusace6/black.png" },
+        { name: "Flash White", hex: "#F6F6FB", image: "assets/devices/oneplusace6/white.png" }
+      ],
+      description: "Китайская версия OnePlus Ace 6 с 6,83-дюймовым плоским OLED-дисплеем разрешением 2800 × 1272 пикселя, частотой обновления до 165 Гц, платформой Snapdragon 8 Elite, аккумулятором 7800 мА·ч, зарядкой 120 Вт и ColorOS 16. Смартфон получил защиту IP66/IP68/IP69/IP69K и ультразвуковой сканер отпечатка пальца. ",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,83 дюйма" },
+            { label: "Тип матрицы", value: "Плоский OLED, 1.5K, 10 бит, HDR10+, Dolby Vision, HDR Vivid, 100% DCI-P3" },
+            { label: "Частота обновления", value: "60/90/120/144/165 Гц, адаптивная" },
+            { label: "Яркость", value: "1800 нит пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Elite" },
+            { label: "Частота ядер", value: "До 4,32 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ или 1 ТБ UFS 4.1" },
+            { label: "ОС", value: "ColorOS 16" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, OIS" },
+            { label: "Ультраширик", value: "8 Мп, угол обзора 112°" },
+            { label: "Видео", value: "4K/120FPS" },
+          ],
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "7800 мА·ч типичная, 7620 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "120 Вт SUPERVOOC" },
+          ],
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP66/IP68/IP69/IP69K" },
+            { label: "Сканер отпечатка", value: "Ультразвуковой, под экраном" },
+            { label: "Дополнительные функции", value: "Три игровых чипа, игровой движок Fengchi, улучшенная система охлаждения, NFC, ИК-порт, стереодинамики, 5G" },
+          ],
+        },
+      ],
+    },
+  ],
+},
+{
   slug: "oneplus-13",
   category: "Смартфоны",
   regions: [
