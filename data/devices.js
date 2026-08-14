@@ -227,10 +227,10 @@ const DEVICES = [
         { name: "Shifting Green", hex: "#ECF8E0", image: "assets/devices/oneplusace6t/green.png" },
         { name: "Electric Purple", hex: "#D5D1E9", image: "assets/devices/oneplusace6t/purple.png" },
         { name: "Flash Black", hex: "#494B4D", image: "assets/devices/oneplusace6t/black.png" },
-        { name: "Genshin Impact Edition", hex: "DCE8F1", image: "assets/devices/oneplusace6t/genshin.png" },
+        { name: "Genshin Impact Edition", hex: "#DCE8F1", image: "assets/devices/oneplusace6t/genshin.png" },
       ],
       description: "Китайская версия OnePlus Ace 6T с 6,83-дюймовым 1.5K AMOLED-дисплеем с частотой обновления 165 Гц, Snapdragon 8 Gen 5, аккумулятором 8300 мА·ч, зарядкой 100 Вт, тройной системой игровых чипов и ColorOS 16. ",
-      relatedTags: null
+      relatedTags: null,
       specs: [
         {
           group: "Экран",
@@ -444,7 +444,7 @@ const DEVICES = [
           items: [
             { label: "Основной сенсор", value: "50 Мп, f/1.8, автофокус, двухосевая OIS" },
             { label: "Ультраширик", value: "8 Мп, f/2.2, угол обзора 112°" },
-            { label: "Телефото", value: "Не указано; оптический зум не поддерживается" },
+            { label: "Телефото", value: "50 Мп, Samsung S5KJN5, 2× оптический зум" },
             { label: "Видео", value: "До 4K 60 к/с; замедленная съёмка до 1080p 240 к/с" }
           ]
         },
