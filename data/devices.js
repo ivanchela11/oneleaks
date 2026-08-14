@@ -471,6 +471,129 @@ const DEVICES = [
     },
   ],
 },
+{
+  slug: "oneplus-13t-13s",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus 13T",
+      tagline: "Компактный флагман со Snapdragon 8 Elite, LTPO-дисплеем 120 Гц и батареей 6260 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Cloud Ink Black", hex: "#5A5A5A", image: "assets/devices/oneplus13t/black.png" },
+        { name: "Morning Mist Gray", hex: "#D6DAE0", image: "assets/devices/oneplus13t/white.png" },
+        { name: "Heart-pounding Pink", hex: "#F5E6E8", image: "assets/devices/oneplus13t/pink.png" }
+      ],
+      description: "Китайская версия OnePlus 13T с 6,32-дюймовым плоским LTPO AMOLED-дисплеем разрешением 2640 × 1216 пикселей и частотой обновления до 120 Гц, Snapdragon 8 Elite, аккумулятором 6260 мА·ч, зарядкой 80 Вт и ColorOS 15 на базе Android 15.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,32 дюйма" },
+            { label: "Тип матрицы", value: "Плоский LTPO AMOLED, 1.5K, 10 бит, Dolby Vision, HDR10+, 100% DCI-P3" },
+            { label: "Частота обновления", value: "1–120 Гц, адаптивная" },
+            { label: "Яркость", value: "До 2400 нит" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Elite" },
+            { label: "Частота ядер", value: "До 4,32 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ или 1 ТБ UFS 4.0" },
+            { label: "ОС", value: "ColorOS 15 на базе Android 15" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony LYT-700/IMX906, f/1.8, OIS" },
+            { label: "Телефото", value: "50 Мп, 2× оптический зум, f/2.0" },
+            { label: "Видео", value: "До 4K 60 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "6260 мА·ч" },
+            { label: "Проводная зарядка", value: "80 Вт SUPERVOOC" },
+          ],
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Quick Key, Wi‑Fi 7, NFC, ИК-порт, стереодинамики, 5G" }
+          ],
+        },
+      ],
+    },
+    {
+      key: "india",
+      label: "India",
+      name: "OnePlus 13s",
+      tagline: "Компактный флагман со Snapdragon 8 Elite, дисплеем ProXDR 120 Гц и батареей 5850 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Green Silk", hex: "#98A08A", image: "assets/devices/oneplus13t/green.png" },
+        { name: "Pink Satin", hex: "#F5E6E8", image: "assets/devices/oneplus13t/pink.png" },
+        { name: "Black Velvet", hex: "#5A5A5A", image: "assets/devices/oneplus13t/black.png" }
+      ],
+      description: "Индийская версия OnePlus 13s с 6,32-дюймовым 1.5K LTPO AMOLED-дисплеем ProXDR с частотой обновления до 120 Гц, Snapdragon 8 Elite, аккумулятором 5850 мА·ч, зарядкой 80 Вт и OxygenOS 15 на базе Android 15.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,32 дюйма" },
+            { label: "Тип матрицы", value: "LTPO AMOLED, 1.5K ProXDR, 10 бит, 100% Display P3" },
+            { label: "Частота обновления", value: "1–120 Гц, адаптивная" },
+            { label: "Яркость", value: "До 1600 нит" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Elite" },
+            { label: "Частота ядер", value: "До 4,32 ГГц" },
+            { label: "Память", value: "12 ГБ LPDDR5X, 256/512 ГБ UFS 4.0" },
+            { label: "ОС", value: "OxygenOS 15.0 на базе Android 15" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony LYTIA 700, f/1.8, OIS" },
+            { label: "Ультраширик", value: "Не указано" },
+            { label: "Телефото", value: "50 Мп, 2× оптический зум, f/2.0, OIS" },
+            { label: "Видео", value: "До 4K 60 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "5850 мА·ч" },
+            { label: "Проводная зарядка", value: "80 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Plus Key, Wi‑Fi 7, Bluetooth 6.0, NFC, ИК-порт, стереодинамики, 5G" },
+          ],
+        },
+      ],
+    },
+  ],
+},
   {
   slug: "oneplus-13r-ace-5",
   category: "Смартфоны",
