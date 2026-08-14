@@ -353,8 +353,8 @@ const DEVICES = [
       tagline: "Игровой флагман с Dimensity 9500, экраном 165 Гц и батареей 8600 мА·ч.",
       status: "Продажа",
       colors: [
-        { name: "Metal Storm", hex: "#333840", image: "assets/devices/oneplusace6ultra/white.png" },
-        { name: "Ace Awakening", hex: "#F4F1E9", image: "assets/devices/oneplusace6ultra/black.png" }
+        { name: "Metal Storm", hex: "#F4F1E9", image: "assets/devices/oneplusace6ultra/white.png" },
+        { name: "Ace Awakening", hex: "#333840", image: "assets/devices/oneplusace6ultra/black.png" }
       ],
       description: "Китайская версия OnePlus Ace 6 Ultra с 6,78-дюймовым плоским LTPS OLED-дисплеем BOE разрешением 2772 × 1272 пикселя и частотой обновления до 165 Гц, платформой MediaTek Dimensity 9500, аккумулятором 8600 мА·ч, зарядкой 120 Вт и ColorOS 16. Смартфон поддерживает защиту IP66/IP68/IP69/IP69K и оснащён 3D-ультразвуковым сканером отпечатка.",
       relatedTags: null,
