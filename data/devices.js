@@ -343,6 +343,69 @@ const DEVICES = [
   ],
 },
 {
+  slug: "oneplus-ace-6-ultra",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus Ace 6 Ultra",
+      tagline: "Игровой флагман с Dimensity 9500, экраном 165 Гц и батареей 8600 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Metal Storm", hex: "#333840", image: "assets/devices/oneplusace6ultra/white.png" },
+        { name: "Ace Awakening", hex: "#F4F1E9", image: "assets/devices/oneplusace6ultra/black.png" }
+      ],
+      description: "Китайская версия OnePlus Ace 6 Ultra с 6,78-дюймовым плоским LTPS OLED-дисплеем BOE разрешением 2772 × 1272 пикселя и частотой обновления до 165 Гц, платформой MediaTek Dimensity 9500, аккумулятором 8600 мА·ч, зарядкой 120 Вт и ColorOS 16. Смартфон поддерживает защиту IP66/IP68/IP69/IP69K и оснащён 3D-ультразвуковым сканером отпечатка.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,78 дюйма" },
+            { label: "Тип матрицы", value: "Плоский LTPS OLED, 1.5K, 10 бит, HDR10+, Dolby Vision, HDR Vivid, 100% DCI-P3" },
+            { label: "Частота обновления", value: "60/90/120/144/165 Гц, адаптивная" },
+            { label: "Яркость", value: "1800 нит пиковой яркости" },
+            { label: "ШИМ", value: "3840 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "MediaTek Dimensity 9500" },
+            { label: "Частота ядер", value: "4,21 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ или 1 ТБ UFS 4.1" },
+            { label: "ОС", value: "ColorOS 16 на базе Android 16" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, 1/1,55 дюйма, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, f/2.2" },
+            { label: "Видео", value: "4K/120FPS" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "8600 мА·ч типичная, 8380 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "120 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP66/IP68/IP69/IP69K" },
+            { label: "Сканер отпечатка", value: "3D ультразвуковой, под экраном" },
+            { label: "Дополнительные функции", value: "Три игровых чипа, игровой движок Fengchi, система охлаждения Glacier, игровой чехол-геймпад, NFC, ИК-порт, стереодинамики, 5G" },
+          ],
+        },
+      ],
+    },
+  ],
+},
+{
   slug: "oneplus-13",
   category: "Смартфоны",
   regions: [
