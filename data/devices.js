@@ -35,9 +35,9 @@ const DEVICES = [
         tagline: "Флагман с упором в производительность.",
         status: "Продажа",
         colors: [
-          { name: "Sand Storm", hex: "#F5F2DF", image: "assets/devices/oneplus15/white.png" },
+          { name: "Sand Storm", hex: "#E3DDD8", image: "assets/devices/oneplus15/white.png" },
           { name: "Infinity Black", hex: "#1A1F26", image: "assets/devices/oneplus15/black.png" },
-          { name: "Ultra Violet", hex: "#DDD3E1", image: "assets/devices/oneplus15/purple.png" },
+          { name: "Ultra Violet", hex: "#EDE5F1", image: "assets/devices/oneplus15/purple.png" },
         ],
         description:
           "OnePlus 15 — это мощный флагманский смартфон с рекордной автономностью и упором на высокую скорость работы.",
