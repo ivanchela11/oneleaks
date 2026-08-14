@@ -422,7 +422,7 @@ OnePlus явно хочет атаковать самую конкурентну
   "author": "@ivanchela11",
   "date": "2026-08-14",
   "cover": "assets/covers/snap8elitegen6pro.jpg",
-  "tags": ["Snapdragon 8 Elite Gen 6 Pro", "Чип"]
+  "tags": ["Snapdragon 8 Elite Gen 6 Pro", "Чип"],
   "content": `
 🚨 **Snapdragon 8 Elite Gen 6 Pro** всплыл в свежем сливе и, если верить цифрам, Qualcomm снова готовит монстра. Чип якобы набирает **4.8 миллиона** баллов в бенчмарке, а релиз ждут уже **22–24 сентября на Гавайях** — звучит так, будто Android-флагманы в 2026-м снова решили играть в «кто громче греется и быстрее летает».
 
