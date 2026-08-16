@@ -905,6 +905,93 @@ const DEVICES = [
     },
   ],
 },
+{
+  slug: "oneplus-watch-3",
+  category: "Умные часы",
+  regions: [
+    {
+      key: "global",
+      label: "Global",
+      name: "OnePlus Watch 3",
+      tagline: "Флагманские умные часы с Wear OS и двойной архитектурой",
+      status: "Продажа",
+      colors: [
+        { name: "Obsidian Titanium", hex: "#38393D", image: "assets/devices/watch3/black.png" },
+        { name: "Emerald Titanium", hex: "#6C7C63", image: "assets/devices/watch3/green.png" }
+      ],
+      description: "Умные часы OnePlus Watch 3 с LTPO AMOLED-дисплеем, двойной архитектурой на Snapdragon W5 Gen 1 и BES2800BP, расширенными функциями здоровья, двухчастотным GPS и длительной автономностью.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Дисплей",
+          items: [
+            { label: "Диагональ", value: '1.5"' },
+            { label: "Тип матрицы", value: "LTPO AMOLED" },
+            { label: "Разрешение", value: "466×466" },
+            { label: "Яркость", value: "Не указано" },
+            { label: "Защита экрана", value: "Сапфировое стекло" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Процессор", value: "Snapdragon W5 Gen 1 + BES2800BP" },
+            { label: "Оперативная память", value: "2 ГБ" },
+            { label: "Встроенная память", value: "32 ГБ" },
+            { label: "ОС", value: "Wear OS by Google + RTOS" }
+          ]
+        },
+        {
+          group: "Здоровье и сенсоры",
+          items: [
+            { label: "Пульсометр", value: "Есть" },
+            { label: "SpO₂", value: "Есть" },
+            { label: "ЭКГ", value: "Есть" },
+            { label: "Температура кожи", value: "Есть" },
+            { label: "GPS", value: "Двухчастотный GPS: GPS, GLONASS, Galileo, BeiDou, QZSS" },
+            { label: "Другие датчики", value: "Акселерометр, гироскоп, барометр, компас, датчик освещенности, геомагнитный датчик" }
+          ]
+        },
+        {
+          group: "Аккумулятор",
+          items: [
+            { label: "Ёмкость", value: "631 мАч" },
+            { label: "Автономность", value: "До 5 дней, до 16 дней в режиме энергосбережения" },
+            { label: "Зарядка", value: "Быстрая магнитная зарядка" }
+          ]
+        },
+        {
+          group: "Корпус",
+          items: [
+            { label: "Материал корпуса", value: "Титан / нержавеющая сталь" },
+            { label: "Размеры", value: "47.6×46.6×11.75 мм" },
+            { label: "Вес", value: "49.7 г" },
+            { label: "Защита", value: "MIL-STD-810H" },
+            { label: "Водонепроницаемость", value: "5ATM / IP68" }
+          ]
+        },
+        {
+          group: "Связь",
+          items: [
+            { label: "Bluetooth", value: "Есть" },
+            { label: "Wi-Fi", value: "Есть" },
+            { label: "NFC", value: "Есть" },
+            { label: "LTE", value: "Отсутствует" }
+          ]
+        },
+        {
+          group: "Функции",
+          items: [
+            { label: "Спортивные режимы", value: "Не указано" },
+            { label: "Звонки", value: "Есть" },
+            { label: "Уведомления", value: "Есть" },
+            { label: "Совместимость", value: "Android" }
+          ],
+        },
+      ],
+    },
+  ],
+},
   {
     slug: "oneplus-pad-3",
     name: "OnePlus Pad 3",
