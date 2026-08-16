@@ -717,6 +717,71 @@ const DEVICES = [
     },
   ],
 },
+{
+  slug: "oneplus-12",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "global",
+      label: "Global",
+      name: "OnePlus 12",
+      tagline: "Флагман со Snapdragon 8 Gen 3, дисплеем ProXDR и камерой Hasselblad.",
+      status: "Продажа",
+      colors: [
+        { name: "Flowy Emerald", hex: "Не указано", image: "assets/devices/oneplus12/green.png" },
+        { name: "Silky Black", hex: "Не указано", image: "assets/devices/oneplus12/black.png" }
+      ],
+      description: "Глобальная версия OnePlus 12 с 6,82-дюймовым QHD+ LTPO AMOLED-дисплеем ProXDR, платформой Snapdragon 8 Gen 3, тройной камерой Hasselblad, аккумулятором 5400 мА·ч, зарядкой 100 Вт SUPERVOOC и 50 Вт AIRVOOC. Смартфон работает на OxygenOS 14 на базе Android 14.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,82 дюйма" },
+            { label: "Тип матрицы", value: "LTPO AMOLED, ProXDR, QHD+, 10 бит, 100% Display P3, Corning Gorilla Glass Victus 2" },
+            { label: "Частота обновления", value: "1–120 Гц, динамическая" },
+            { label: "Яркость", value: "1600 нит HBM, до 4500 нит пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 3" },
+            { label: "Частота ядер", value: "До 3,3 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ UFS 4.0" },
+            { label: "ОС", value: "OxygenOS 14.0 на базе Android 14" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony LYT-808, 1/1,4 дюйма, f/1.6, OIS" },
+            { label: "Ультраширик", value: "48 Мп, Sony IMX581, угол обзора 114°" },
+            { label: "Телефото", value: "64 Мп, перископический объектив, 3× оптический зум, OIS" },
+            { label: "Видео", value: "До 8K 24 к/с; 4K 30/60 к/с; 1080p 30/60 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "5400 мА·ч типичная, двухэлементная батарея" },
+            { label: "Проводная зарядка", value: "100 Вт SUPERVOOC" },
+            { label: "Беспроводная зарядка", value: "50 Вт AIRVOOC" }
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Hasselblad Camera for Mobile, NFC, Wi‑Fi 7, Bluetooth 5.4, ИК-порт, Alert Slider, стереодинамики, 5G" }
+          ],
+        },
+      ],
+    },
+  ],
+},
   {
     slug: "oneplus-pad-3",
     name: "OnePlus Pad 3",
