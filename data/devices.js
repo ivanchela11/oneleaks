@@ -782,8 +782,6 @@ const DEVICES = [
     },
   ],
 },
-OnePlus 12R (глобал) /  Ace 3 (Китай)
-
 {
   slug: "oneplus-12r-ace-3",
   category: "Смартфоны",
