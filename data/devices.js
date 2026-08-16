@@ -782,6 +782,131 @@ const DEVICES = [
     },
   ],
 },
+OnePlus 12R (глобал) /  Ace 3 (Китай)
+
+{
+  slug: "oneplus-12r-ace-3",
+  category: "Смартфоны",
+  regions: [
+    {
+      key: "global",
+      label: "Global",
+      name: "OnePlus 12R",
+      tagline: "Субфлагман со Snapdragon 8 Gen 2, LTPO-дисплеем ProXDR и батареей 5500 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Black", hex: "#6A6B6F", image: "assets/devices/oneplus12r/black.png" },
+        { name: "Blue", hex: "#C6E3FD", image: "assets/devices/oneplus12r/blue.png" }
+      ],
+      description: "Глобальная версия OnePlus 12R с 6,78-дюймовым LTPO 4.0 AMOLED-дисплеем ProXDR, платформой Snapdragon 8 Gen 2, основной камерой Sony IMX890, аккумулятором 5500 мА·ч, зарядкой 100 Вт SUPERVOOC и OxygenOS 14 на базе Android 14.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,78 дюйма" },
+            { label: "Тип матрицы", value: "LTPO 4.0 AMOLED, ProXDR, 10 бит, HDR10+, Corning Gorilla Glass Victus 2" },
+            { label: "Частота обновления", value: "1–120 Гц, динамическая" },
+            { label: "Яркость", value: "До 4500 нит пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 2" },
+            { label: "Частота ядер", value: "До 3,36 ГГц" },
+            { label: "Память", value: "16 ГБ LPDDR5X, 256 ГБ UFS 3.1" },
+            { label: "ОС", value: "OxygenOS 14.0 на базе Android 14" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony IMX890, 1/1,56 дюйма, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, угол обзора 112°, f/2.2" },
+            { label: "Макро", value: "2 Мп, f/2.4" },
+            { label: "Видео", value: "До 4K 60 к/с; замедленная съёмка 1080p 240 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "5500 мА·ч типичная, 5360 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "100 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Wi‑Fi 7, NFC, ИК-порт, Alert Slider, стереодинамики, 5G" }
+          ]
+        }
+      ]
+    },
+    {
+      key: "china",
+      label: "China",
+      name: "OnePlus Ace 3",
+      tagline: "Субфлагман со Snapdragon 8 Gen 2, 1.5K-дисплеем Oriental и батареей 5500 мА·ч.",
+      status: "Продажа",
+      colors: [
+        { name: "Mingsha Gold", hex: "#F8D3C7", image: "assets/devices/oneplus12r/gold.png" },
+        { name: "Star Black", hex: "#6A6B6F", image: "assets/devices/oneplus12r/black.png" },
+        { name: "Blue", hex: "#C6E3FD", image: "assets/devices/oneplus12r/blue.png" }
+      ],
+      description: "Китайская версия OnePlus Ace 3 с 6,78-дюймовым AMOLED-дисплеем Oriental разрешением 2780 × 1264 пикселя, платформой Snapdragon 8 Gen 2, тройной камерой, аккумулятором 5500 мА·ч, зарядкой 100 Вт и ColorOS 14 на базе Android 14.",
+      relatedTags: null,
+      specs: [
+        {
+          group: "Экран",
+          items: [
+            { label: "Диагональ", value: "6,78 дюйма" },
+            { label: "Тип матрицы", value: "AMOLED, 1.5K Oriental Screen, 10 бит, HDR10+, Dolby Vision" },
+            { label: "Частота обновления", value: "До 120 Гц" },
+            { label: "Яркость", value: "4500 нит пиковой яркости" },
+            { label: "ШИМ", value: "2160 Гц" }
+          ]
+        },
+        {
+          group: "Производительность",
+          items: [
+            { label: "Чипсет", value: "Qualcomm Snapdragon 8 Gen 2" },
+            { label: "Частота ядер", value: "До 3,2 ГГц" },
+            { label: "Память", value: "12/16 ГБ LPDDR5X, 256/512 ГБ или 1 ТБ UFS 4.0" },
+            { label: "ОС", value: "ColorOS 14 на базе Android 14" }
+          ]
+        },
+        {
+          group: "Камеры",
+          items: [
+            { label: "Основной сенсор", value: "50 Мп, Sony IMX890, 1/1,56 дюйма, f/1.8, OIS" },
+            { label: "Ультраширик", value: "8 Мп, угол обзора 112°, f/2.2" },
+            { label: "Макро", value: "2 Мп, f/2.4" },
+            { label: "Видео", value: "До 4K 60 к/с" }
+          ]
+        },
+        {
+          group: "Батарея и зарядка",
+          items: [
+            { label: "Ёмкость", value: "5500 мА·ч типичная, 5360 мА·ч номинальная" },
+            { label: "Проводная зарядка", value: "100 Вт SUPERVOOC" },
+          ]
+        },
+        {
+          group: "Прочее",
+          items: [
+            { label: "Защита", value: "IP65" },
+            { label: "Сканер отпечатка", value: "Оптический, под экраном" },
+            { label: "Дополнительные функции", value: "Wi‑Fi 7, NFC, ИК-порт, Alert Slider, стереодинамики, 5G" }
+          ],
+        },
+      ],
+    },
+  ],
+},
   {
     slug: "oneplus-pad-3",
     name: "OnePlus Pad 3",
