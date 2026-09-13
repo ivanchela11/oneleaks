@@ -829,3 +829,65 @@ button{ font: inherit; color: inherit; }
 .specs-row:last-child{ border-bottom:none; padding-bottom:0; }
 .specs-row dt{ color: var(--md-sys-color-on-surface-variant); }
 .specs-row dd{ margin:0; color: var(--md-sys-color-on-surface); font-weight: 500; text-align:right; }
+
+/* =========================================================================
+   Countdown banner — pinned above the post feed on the home page.
+   Image is optional: until assets/countdown/coloros17.jpg exists, the
+   onerror handler in index.html swaps it for the usual placeholder icon.
+   ========================================================================= */
+.countdown-banner{
+  position: relative; overflow: hidden;
+  margin-top: var(--sp-24);
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  background: linear-gradient(135deg, var(--md-sys-color-primary-container), var(--md-sys-color-tertiary-container));
+}
+.countdown-banner__blob{
+  position:absolute; top:-50px; right:-50px; width:180px; height:180px;
+  background: color-mix(in srgb, var(--md-sys-color-surface) 25%, transparent);
+  animation: morph 9s var(--ease-emphasized) infinite alternate;
+  z-index:0;
+}
+.countdown-banner__inner{
+  position:relative; z-index:1;
+  display:flex; align-items:center; gap: var(--sp-24);
+  padding: var(--sp-24);
+}
+.countdown-banner__media{
+  position:relative; flex:none; width:150px; height:150px;
+  border-radius: var(--md-sys-shape-corner-large);
+  overflow:hidden;
+  background: color-mix(in srgb, var(--md-sys-color-surface) 30%, transparent);
+}
+.countdown-banner__media img{ width:100%; height:100%; object-fit:cover; display:block; }
+.countdown-banner__media .cover-frame__empty{ position:absolute; inset:0; background:transparent; color: var(--md-sys-color-on-primary-container); opacity:.8; }
+.countdown-banner__media .cover-frame__empty svg{ width:36px; height:36px; }
+
+.countdown-banner__body{ min-width:0; flex:1; }
+.countdown-banner__eyebrow{
+  display:inline-flex; align-items:center; gap: var(--sp-8);
+  font: var(--md-sys-typescale-label-large); letter-spacing:0.06em; text-transform:uppercase;
+  color: var(--md-sys-color-on-primary-container); opacity:.9;
+}
+.countdown-banner__eyebrow .dot{ width:8px; height:8px; border-radius:50%; background: var(--md-sys-color-error); animation: pulse 1.8s ease-in-out infinite; }
+.countdown-banner__title{ font: var(--md-sys-typescale-headline-medium); color: var(--md-sys-color-on-primary-container); margin-top: 2px; }
+.countdown-banner__date{ font: var(--md-sys-typescale-body-medium); color: var(--md-sys-color-on-primary-container); opacity:.85; margin-top: 2px; }
+
+.countdown-timer{ display:flex; gap: var(--sp-12); margin-top: var(--sp-16); flex-wrap:wrap; }
+.countdown-unit{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-width: 64px; padding: var(--sp-8) var(--sp-12);
+  background: color-mix(in srgb, var(--md-sys-color-surface) 55%, transparent);
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+.countdown-unit__value{
+  font: 700 1.5rem/1.2 var(--font-display); color: var(--md-sys-color-on-primary-container);
+  font-variant-numeric: tabular-nums;
+}
+.countdown-unit__label{ font: var(--md-sys-typescale-label-small); color: var(--md-sys-color-on-primary-container); opacity:.8; }
+
+@media (max-width: 599px){
+  .countdown-banner__inner{ flex-direction:column; align-items:flex-start; padding: var(--sp-16); }
+  .countdown-banner__media{ width:100%; height:130px; }
+  .countdown-timer{ width:100%; }
+  .countdown-unit{ flex:1; min-width: 56px; }
+}
