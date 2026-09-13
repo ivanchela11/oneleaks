@@ -29,6 +29,32 @@
   </header>
 
   <main class="md3-content">
+    <div class="container">
+      <section class="countdown-banner" aria-label="Обратный отсчёт до презентации ColorOS 17">
+        <span class="countdown-banner__blob" aria-hidden="true"></span>
+        <div class="countdown-banner__inner">
+          <div class="countdown-banner__media">
+            <img src="assets/countdown/coloros17.jpg" alt="ColorOS 17" id="countdown-img"
+                 onerror="this.style.display='none'; document.getElementById('countdown-img-empty').style.display='grid';">
+            <div class="cover-frame__empty" id="countdown-img-empty" style="display:none;">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4.5 4.5 4.5 9c0 4 3 6.5 3 9.5H16.5c0-3 3-5.5 3-9.5C19.5 4.5 16 2 12 2z"/></svg>
+            </div>
+          </div>
+          <div class="countdown-banner__body">
+            <span class="countdown-banner__eyebrow"><span class="dot"></span> Скоро презентация</span>
+            <h2 class="countdown-banner__title">ColorOS 17</h2>
+            <p class="countdown-banner__date">17 сентября 2026</p>
+            <div class="countdown-timer" id="countdown-timer">
+              <div class="countdown-unit"><span class="countdown-unit__value" id="cd-days">—</span><span class="countdown-unit__label">дней</span></div>
+              <div class="countdown-unit"><span class="countdown-unit__value" id="cd-hours">—</span><span class="countdown-unit__label">часов</span></div>
+              <div class="countdown-unit"><span class="countdown-unit__value" id="cd-minutes">—</span><span class="countdown-unit__label">минут</span></div>
+              <div class="countdown-unit"><span class="countdown-unit__value" id="cd-seconds">—</span><span class="countdown-unit__label">секунд</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <section class="hero">
       <div class="hero__blobs" aria-hidden="true">
         <span class="blob blob--a"></span>
@@ -130,3 +156,4 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+
