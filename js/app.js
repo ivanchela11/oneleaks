@@ -175,6 +175,42 @@
     renderFooterTagCloud(document.getElementById("footer-tagcloud"), POSTS);
   }
 
+  /* ---------------- Countdown banner (home page only) ----------------
+   * To change the date/time, edit TARGET below. To add the image, just
+   * drop a file at assets/countdown/coloros17.jpg — no code change needed,
+   * the placeholder icon disappears automatically once the file exists.
+   * --------------------------------------------------------------- */
+  function initCountdown() {
+    const el = document.getElementById("countdown-timer");
+    if (!el) return;
+
+    const TARGET = new Date("2026-09-17T00:00:00").getTime();
+    const dDays = document.getElementById("cd-days");
+    const dHours = document.getElementById("cd-hours");
+    const dMinutes = document.getElementById("cd-minutes");
+    const dSeconds = document.getElementById("cd-seconds");
+
+    let timer;
+    function tick() {
+      const diff = TARGET - Date.now();
+      if (diff <= 0) {
+        el.innerHTML = `<div class="countdown-unit"><span class="countdown-unit__value">🎉</span><span class="countdown-unit__label">Уже здесь</span></div>`;
+        clearInterval(timer);
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      if (dDays) dDays.textContent = String(days);
+      if (dHours) dHours.textContent = String(hours).padStart(2, "0");
+      if (dMinutes) dMinutes.textContent = String(minutes).padStart(2, "0");
+      if (dSeconds) dSeconds.textContent = String(seconds).padStart(2, "0");
+    }
+    tick();
+    timer = setInterval(tick, 1000);
+  }
+
   /* =========================================================================
      Devices — reads window.DEVICES (data/devices.js), same "edit one file"
      philosophy as posts: a catalog grid (devices.html) and a detail page
@@ -203,7 +239,8 @@
     const src = escapeHtml(firstColor.image);
     return `
       <div class="cover-frame__blur" style="background-image:url('${src}')" aria-hidden="true"></div>
-      <img src="${src}" alt="" loading="lazy" class="cover-frame__img">
+      <img src="${src}" alt="" loading="lazy" class="cover-frame__img"
+           onerror="this.parentElement.innerHTML='<div class=&quot;cover-frame__empty&quot;>${FALLBACK_COVER_ICON.replace(/"/g, "&quot;")}</div>'">
     `;
   }
 
@@ -411,7 +448,7 @@
           <div class="device-gallery">
             <div class="device-gallery__frame cover-frame" id="device-gallery-frame">
               ${
-                colors[0]
+                colors[0] && colors[0].image
                   ? `<div class="cover-frame__blur" id="device-gallery-blur" style="background-image:url('${escapeHtml(colors[0].image)}')" aria-hidden="true"></div>
                      <img src="${escapeHtml(colors[0].image)}" alt="${escapeHtml(region.name)}" id="device-gallery-img" class="cover-frame__img">`
                   : `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`
@@ -441,18 +478,31 @@
 
       // Color switcher: click a swatch, swap the gallery image (and its
       // blurred backdrop) plus the caption — no page reload.
-      const galleryImg = document.getElementById("device-gallery-img");
-      const galleryBlur = document.getElementById("device-gallery-blur");
+      const galleryFrame = document.getElementById("device-gallery-frame");
       const swatchLabel = document.getElementById("swatch-label");
+
+      function setGalleryColor(color) {
+        if (!galleryFrame) return;
+        if (color.image) {
+          const src = escapeHtml(color.image);
+          galleryFrame.innerHTML = `
+            <div class="cover-frame__blur" style="background-image:url('${src}')" aria-hidden="true"></div>
+            <img src="${src}" alt="${escapeHtml(region.name)}" class="cover-frame__img"
+                 onerror="this.parentElement.innerHTML='<div class=&quot;cover-frame__empty&quot;>${FALLBACK_COVER_ICON.replace(/"/g, "&quot;")}</div>'">
+          `;
+        } else {
+          galleryFrame.innerHTML = `<div class="cover-frame__empty">${FALLBACK_COVER_ICON}</div>`;
+        }
+        if (swatchLabel) swatchLabel.textContent = color.name;
+      }
+
       mount.querySelectorAll(".swatch").forEach((btn) => {
         btn.addEventListener("click", () => {
           const color = colors[Number(btn.dataset.index)];
           if (!color) return;
           mount.querySelectorAll(".swatch").forEach((s) => s.classList.remove("is-active"));
           btn.classList.add("is-active");
-          if (galleryImg) galleryImg.src = color.image;
-          if (galleryBlur) galleryBlur.style.backgroundImage = `url('${color.image}')`;
-          if (swatchLabel) swatchLabel.textContent = color.name;
+          setGalleryColor(color);
         });
       });
 
@@ -775,5 +825,6 @@
     initDevices();
     initDeviceDetail();
     initFooter();
+    initCountdown();
   });
 })();
